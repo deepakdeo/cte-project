@@ -1,0 +1,21 @@
+Date,Reflection,primary mood,secondary mood,"productivity
+percentage","when most 
+productive","studied 
+at home","studied 
+at school",breakfast qualtity,lunch quality,dinner quality,"water 
+drank","workout 
+did",meditation,"morning 
+shower","played 
+sports","interaction 
+w/ partner","interaction 
+w/ family","interaction 
+w/ friends",sickness,"sleep 
+duration","nap 
+today","deep sleep 
+percentage","REM sleep 
+percentage",dinner time,bed time,wakeup time
+"Jan 27, 2025","Had a great day, worked on project",happy,energetic,75,1,yes,no,3,4,4,2,yes,no,yes,no,positive,na,positive,no,7h38m,no,21,8,8:40 PM,10:15 PM,6:33 AM
+Jan 28,Tired but pushed through,tired,neutral,0,5,no,yes,2,2,3,1,no,no,no,no,neutral,positive,neutral,yes,9h6m,no,21,5,8:15 PM,10:00 PM,7:23 AM
+Jan 29,Felt unmotivated today,sad,neutral,10,1,yes,no,2,3,2,1,no,no,yes,no,na,positive,positive,no,7h56m,no,21,4,8:30 PM,10:19 PM,6:10 AM
+Jan 30,Good focus in morning,productive,happy,23,12,no,no,4,4,4,2,yes,yes,yes,yes,positive,neutral,positive,no,7h53m,no,27,9,8:50 PM,10:03 PM,6:17 AM
+Jan 31,Low energy evening,neutral,tired,5,3,no,yes,3,2,2,2,no,yes,no,no,negative,neutral,neutral,no,7h2m,no,25,15,7:30 PM,9:55 PM,5:16 AM
