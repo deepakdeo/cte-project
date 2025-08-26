@@ -1,26 +1,30 @@
 #!/usr/bin/env python3
 """
 CTE — data.py
---------------
+
 Load the raw self-tracking CSV and produce a clean, typed Parquet table.
 
-Highlights (interview-ready):
-- Canonical header schema (explicit rename map for your CSV).
-- Deterministic parsing for dates/times (no "guessing" formats).
-- Yes/No coercion supports many variants (yes/no/y/n/true/false/t/f/1/0).
-- Social interactions = Option B:
-    * score:      negative=-1, neutral=0, positive=+1,  'na' (no interaction) -> 0
-    * no_interaction flag: 1 if raw == 'na', else 0
-    * genuine missing (blank/unknown) remains NaN in score (distinct from 'na')
-- Decode "when_most_productive" codebook (1,2,3,12,13,23,123,5)
-  and add one-hot flags (morning/afternoon/evening/none).
-- Robust numeric coercion for %, durations (e.g., '7h38m'), and free-text numbers.
-- Clip percentages to [0, 100].
+Highlights
+----------
+• Canonical schema: fix raw headers (newlines/typos) to snake_case.
+• Deterministic parsing for dates/times/durations (no "best guess").
+• Robust coercions:
+    - yes/no → 0/1 (tolerant: yes/y/true/t/1 etc.)
+    - percentages → 0–100 floats (with clipping)
+    - durations like "7h38m" / "7:38" → float hours
+• Social interactions:
+    - sentiment score −1/0/+1
+    - separate *_no_interaction flag for explicit “na”
+• Meal quality (new):
+    - normalize {carb heavy, protein heavy, fat heavy, balanced, na}
+    - *_no_meal flag when raw == 'na'
+    - one-hot columns per category for modeling
+• Decode the “when most productive” codebook and add one-hot flags.
 
 CLI
 ---
 poetry run python src/cte/data.py \
-  --in  data/raw/cte-project_data.csv \
+  --in data/raw/cte-project_data.csv \
   --out data/interim/clean.parquet
 """
 
@@ -39,8 +43,7 @@ import pandas as pd
 LOG = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
 
-# --------- Explicit header mapping (from the provided CSV) ----------
-# (Fixes newlines/spacing/typos → canonical snake_case names.)
+# --------- Explicit header mapping (from the source CSV) ----------
 RENAME_MAP: Dict[str, str] = {
     "Date": "date",
     "Reflection": "reflection",
@@ -50,10 +53,10 @@ RENAME_MAP: Dict[str, str] = {
     "when most \nproductive": "when_most_productive",
     "studied \nat home": "studied_at_home",
     "studied \nat school": "studied_at_school",
-    "breakfast qualtity": "breakfast_quality",  # fix typo
+    "breakfast qualtity": "breakfast_quality",  # typo in source
     "lunch quality": "lunch_quality",
     "dinner quality": "dinner_quality",
-    "water \ndrank": "water_drank_l",           # liters
+    "water \ndrank": "water_drank_l",          # liters
     "workout \ndid": "workout_did",
     "meditation": "meditation",
     "morning \nshower": "morning_shower",
@@ -91,26 +94,24 @@ INTERACTION_COLS = [
 
 TIME_COLS = ["dinner_time", "bed_time", "wakeup_time"]
 
-# Numeric columns that are **not** percentages and don't need special duration parsing
+# simple numeric columns
 NUMERIC_COLS = [
+    "productivity_pct",
+    "deep_sleep_pct",
+    "rem_sleep_pct",
     "water_drank_l",
-    "breakfast_quality",
-    "lunch_quality",
-    "dinner_quality",
 ]
 
-# Duration-like columns (e.g., '7h38m', '7:38', '7.5')
+# duration-like columns that need special parsing
 DURATION_COLS = ["sleep_duration_h"]
 
-MOOD_COLS = ["primary_mood", "secondary_mood"]
+# moods/text
+TEXT_COLS = ["primary_mood", "secondary_mood", "reflection"]
 
-# text columns (kept as-is, just trimmed)
-TEXT_COLS = ["reflection"]
+# meal quality columns
+MEAL_COLS = ["breakfast_quality", "lunch_quality", "dinner_quality"]
 
-# percent-like columns
-PERCENT_COLS = ["productivity_pct", "deep_sleep_pct", "rem_sleep_pct"]
-
-# ---- "when most productive" codebook (decoder) ----
+# ---- “when most productive” codebook (decoder) ----
 PRODUCTIVE_CODE_MAP = {
     1: "morning",
     2: "afternoon",
@@ -123,18 +124,29 @@ PRODUCTIVE_CODE_MAP = {
 }
 
 # ---- robust yes/no tokens ----
-_BOOL_TRUE = {"yes", "y", "true", "t", "1", "home", "school"}  # 'home'/'school' appear in study flags
+_BOOL_TRUE = {"yes", "y", "true", "t", "1", "home", "school"}  # dataset quirks
 _BOOL_FALSE = {"no", "n", "false", "f", "0"}
 
+# ---- meal tokens normalization ----
+_MEAL_TOKENS = {
+    "carb heavy": "carb_heavy",
+    "carb-heavy": "carb_heavy",
+    "carbheavy": "carb_heavy",
+    "protein heavy": "protein_heavy",
+    "protein-heavy": "protein_heavy",
+    "proteinheavy": "protein_heavy",
+    "fat heavy": "fat_heavy",
+    "fat-heavy": "fat_heavy",
+    "fatheavy": "fat_heavy",
+    "balanced": "balanced",
+    "na": "na",
+}
+
+MEAL_CATEGORIES = ["carb_heavy", "protein_heavy", "fat_heavy", "balanced"]
 
 # ---------------- Deterministic parsers ----------------
+
 def _parse_date_with_default_year(s: pd.Series) -> pd.Series:
-    """
-    Handle rows like 'Jan 27, 2025' and 'Jan 28' (missing year).
-    1) Find a default year from any row that already has a year, else use current year.
-    2) Append that year to rows missing it.
-    3) Parse using fixed '%b %d, %Y'.
-    """
     year_pat = re.compile(r",\s*(\d{4})$")
     default_year: Optional[int] = None
     for v in s.dropna().astype(str):
@@ -155,10 +167,6 @@ def _parse_date_with_default_year(s: pd.Series) -> pd.Series:
 
 
 def _parse_time_to_minutes(s: pd.Series) -> pd.Series:
-    """
-    Parse '10:15 PM'/'6:33 AM' → integer minutes after midnight.
-    Uses fixed format '%I:%M %p' to avoid inference.
-    """
     def to_minutes(x) -> Optional[int]:
         if x is None or x is pd.NA:
             return None
@@ -170,11 +178,11 @@ def _parse_time_to_minutes(s: pd.Series) -> pd.Series:
             return int(t.hour) * 60 + int(t.minute)
         except Exception:
             return None
-
     return s.astype("string").map(to_minutes)
 
 
 # ---------------- Coercion helpers ----------------
+
 def _norm_token(x) -> Optional[str]:
     if pd.isna(x):
         return None
@@ -209,46 +217,28 @@ def _coerce_percent_or_number(s: pd.Series) -> pd.Series:
 
 
 def _coerce_float(s: pd.Series) -> pd.Series:
-    """
-    Convert a Series to float robustly:
-    - Allows plain numbers ('7.5', '100', '1,500')
-    - Extracts numeric portion from strings with units ('2 L', '500ml')
-    - Returns NaN when nothing numeric is present
-    """
     def to_float(x):
         if pd.isna(x):
             return np.nan
         text = str(x).strip()
         if text == "":
             return np.nan
-        # Try fast path
         try:
             return float(text.replace(",", ""))
         except Exception:
             pass
-        # Extract first number like -12.34
         m = re.search(r"-?\d+(?:\.\d+)?", text.replace(",", ""))
         return float(m.group(0)) if m else np.nan
-
     return s.map(to_float)
 
 
 def _parse_duration_to_hours(val) -> float:
-    """
-    Parse durations like:
-      - '7h38m', '7 h 38 m'
-      - '7:38'
-      - '7.5'
-      - '7h', '45m'
-    Returns hours as float, or NaN if unknown.
-    """
     if pd.isna(val):
         return np.nan
     s = str(val).strip().lower()
     if s in {"", "na", "none"}:
         return np.nan
 
-    # 1) 7h38m / 7h / 38m
     m = re.fullmatch(r"(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?", s)
     if m:
         h = int(m.group(1)) if m.group(1) else 0
@@ -257,30 +247,28 @@ def _parse_duration_to_hours(val) -> float:
             return np.nan
         return h + mins / 60.0
 
-    # 2) 7:38
     m = re.fullmatch(r"(\d{1,2}):(\d{1,2})", s)
     if m:
         h = int(m.group(1))
         mins = int(m.group(2))
         return h + mins / 60.0
 
-    # 3) Plain float like 7.5
     try:
         return float(s)
     except Exception:
         return np.nan
 
 
-# -------- Social interactions (Option B: score 0 + flag) --------
+# -------- Social interactions --------
 def _map_interaction(series: pd.Series, base: str) -> pd.DataFrame:
     """
     Returns two columns:
-      {base}_score:          negative=-1, neutral=0, positive=+1, 'na'→0, NaN stays NaN
+      {base}_score: negative=-1, neutral=0, positive=+1, 'na'→0, NaN→NaN
       {base}_no_interaction: 1 if raw=='na' (case-insensitive), else 0
     """
     def score_val(x):
         tok = _norm_token(x)
-        if tok is None:        # genuine missing/unknown
+        if tok is None:
             return np.nan
         if tok == "negative":
             return -1.0
@@ -288,7 +276,7 @@ def _map_interaction(series: pd.Series, base: str) -> pd.DataFrame:
             return 0.0
         if tok == "positive":
             return 1.0
-        if tok == "na":        # no interaction that day
+        if tok == "na":
             return 0.0
         return np.nan
 
@@ -302,47 +290,68 @@ def _map_interaction(series: pd.Series, base: str) -> pd.DataFrame:
     })
 
 
+# -------- Meal quality --------
+def _normalize_meal_token(x: object) -> Optional[str]:
+    tok = _norm_token(x)
+    if tok is None:
+        return None
+    return _MEAL_TOKENS.get(tok, None)
+
+def _encode_meal(series: pd.Series, base: str) -> pd.DataFrame:
+    """
+    For each meal column (e.g., 'breakfast_quality'):
+      - {base}_quality: normalized category string or <NA>
+      - {base}_no_meal: Int64 1 if original == 'na', else 0
+      - one-hots: {base}_carb_heavy / _protein_heavy / _fat_heavy / _balanced
+    """
+    norm = series.map(_normalize_meal_token).astype("string")
+    no_meal = norm.eq("na").astype("Int64")
+    cat = norm.where(~norm.eq("na"), other=pd.NA).astype("category")
+    out = pd.DataFrame({
+        f"{base}_quality": cat,
+        f"{base}_no_meal": no_meal,
+    })
+    for cat_name in MEAL_CATEGORIES:
+        out[f"{base}_{cat_name}"] = norm.eq(cat_name).astype("Int64")
+    return out
+
+
 # ---------------- Cleaning pipeline ----------------
-def standardize_columns(df: pd.DataFrame) -> pd.DataFrame:
-    # warn for missing expected raw headers (helps catch typos in source)
+
+def _standardize_columns(df: pd.DataFrame) -> pd.DataFrame:
     missing = [k for k in RENAME_MAP.keys() if k not in df.columns]
     if missing:
         LOG.warning("Some expected raw columns are missing: %s", missing)
     return df.rename(columns=RENAME_MAP)
 
 
-def clean_types(df: pd.DataFrame) -> pd.DataFrame:
-    # date
+def _clean_types(df: pd.DataFrame) -> pd.DataFrame:
     if "date" in df.columns:
         df["date"] = _parse_date_with_default_year(df["date"])
 
-    # time → minutes (keep original strings too)
     for col in TIME_COLS:
         if col in df.columns:
             df[col] = df[col].astype("string").str.strip()
             df[f"{col}_minutes"] = _parse_time_to_minutes(df[col])
 
-    # durations → hours as float
     for col in DURATION_COLS:
         if col in df.columns:
             df[col] = df[col].map(_parse_duration_to_hours)
 
-    # percentages (0–100)
-    for col in PERCENT_COLS:
+    if "productivity_pct" in df.columns:
+        df["productivity_pct"] = _coerce_percent_or_number(df["productivity_pct"]).clip(0, 100)
+    for col in ["deep_sleep_pct", "rem_sleep_pct"]:
         if col in df.columns:
             df[col] = _coerce_percent_or_number(df[col]).clip(0, 100)
 
-    # simple numerics
     for col in NUMERIC_COLS:
         if col in df.columns:
             df[col] = _coerce_float(df[col])
 
-    # booleans
     for col in BOOLEAN_COLS:
         if col in df.columns:
             df[col] = _coerce_yes_no(df[col])
 
-    # interactions (Option B)
     if "interaction_partner" in df.columns:
         df = pd.concat([df, _map_interaction(df["interaction_partner"], "partner")], axis=1)
     if "interaction_family" in df.columns:
@@ -350,35 +359,38 @@ def clean_types(df: pd.DataFrame) -> pd.DataFrame:
     if "interaction_friends" in df.columns:
         df = pd.concat([df, _map_interaction(df["interaction_friends"], "friends")], axis=1)
 
-    # moods (normalized lower-case strings)
-    for col in MOOD_COLS:
-        if col in df.columns:
-            df[col] = (
-                df[col]
-                .astype("string")
-                .str.strip()
-                .str.lower()
-                .replace({"": pd.NA, "nan": pd.NA})
-            )
+    if "breakfast_quality" in df.columns:
+        enc = _encode_meal(df["breakfast_quality"], "breakfast")
+        df = df.drop(columns=["breakfast_quality"])
+        df = pd.concat([df, enc], axis=1)
+    if "lunch_quality" in df.columns:
+        enc = _encode_meal(df["lunch_quality"], "lunch")
+        df = df.drop(columns=["lunch_quality"])
+        df = pd.concat([df, enc], axis=1)
+    if "dinner_quality" in df.columns:
+        enc = _encode_meal(df["dinner_quality"], "dinner")
+        df = df.drop(columns=["dinner_quality"])
+        df = pd.concat([df, enc], axis=1)
 
-    # reflection text (trim; keep as string)
     for col in TEXT_COLS:
         if col in df.columns:
-            df[col] = df[col].astype("string").str.strip().replace({"": pd.NA})
+            df[col] = df[col].astype("string").str.strip()
+            df[col] = df[col].replace({"": pd.NA})
 
-    # decode when_most_productive + one-hot convenience flags
     if "when_most_productive" in df.columns:
         codes = pd.to_numeric(df["when_most_productive"], errors="coerce")
         decoded = codes.map(PRODUCTIVE_CODE_MAP)
         df["when_most_productive_decoded"] = decoded.astype("category")
-
-        # one-hots for morning/afternoon/evening/not_productive
-        df["prod_morning"] = decoded.str.contains("morning", na=False).astype("Int64")
+        df["prod_morning"]   = decoded.str.contains("morning",   na=False).astype("Int64")
         df["prod_afternoon"] = decoded.str.contains("afternoon", na=False).astype("Int64")
-        df["prod_evening"] = decoded.str.contains("evening", na=False).astype("Int64")
-        df["prod_none"] = (decoded == "not_productive").astype("Int64")
+        df["prod_evening"]   = decoded.str.contains("evening",   na=False).astype("Int64")
+        df["prod_none"]      = (decoded == "not_productive").astype("Int64")
 
-    # preferred column order (date + key numerics first)
+    # sanity: ensure no duplicate column names survive
+    if df.columns.duplicated().any():
+        dups = df.columns[df.columns.duplicated(keep=False)].tolist()
+        raise ValueError(f"Duplicate columns after cleaning: {dups}")
+
     prefer_first = [
         "date",
         "wakeup_time_minutes", "dinner_time_minutes", "bed_time_minutes",
@@ -391,9 +403,11 @@ def clean_types(df: pd.DataFrame) -> pd.DataFrame:
         "partner_score", "partner_no_interaction",
         "family_score", "family_no_interaction",
         "friends_score", "friends_no_interaction",
+        "breakfast_no_meal", "breakfast_carb_heavy", "breakfast_protein_heavy", "breakfast_fat_heavy", "breakfast_balanced",
+        "lunch_no_meal", "lunch_carb_heavy", "lunch_protein_heavy", "lunch_fat_heavy", "lunch_balanced",
+        "dinner_no_meal", "dinner_carb_heavy", "dinner_protein_heavy", "dinner_fat_heavy", "dinner_balanced",
+        "breakfast_quality", "lunch_quality", "dinner_quality",
         "when_most_productive_decoded", "prod_morning", "prod_afternoon", "prod_evening", "prod_none",
-        "primary_mood", "secondary_mood",
-        "reflection",
     ]
     cols = [c for c in prefer_first if c in df.columns] + [c for c in df.columns if c not in prefer_first]
     return df.loc[:, cols]
@@ -403,15 +417,14 @@ def clean_csv(in_path: Path, out_path: Path) -> pd.DataFrame:
     LOG.info("Loading raw CSV: %s", in_path)
     df = pd.read_csv(in_path)
     LOG.info("Loaded shape: %s", df.shape)
-    df = standardize_columns(df)
-    df = clean_types(df)
+    df = _standardize_columns(df)
+    df = _clean_types(df)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_parquet(out_path, index=False)
     LOG.info("Wrote cleaned data to %s (rows=%d, cols=%d)", out_path, len(df), df.shape[1])
     return df
 
 
-# ---------------- CLI ----------------
 def _argparser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Clean CTE raw CSV into typed Parquet.")
     p.add_argument("--in", dest="in_path", required=True, type=Path, help="Path to raw CSV")
