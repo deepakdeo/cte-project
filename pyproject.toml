@@ -28,7 +28,9 @@ dependencies = [
     "vadersentiment (>=3.3.2,<4.0.0)",
     "xgboost (>=3.0.4,<4.0.0)",
     "ipykernel (>=6.30.1,<7.0.0)",
-    "jupyter (>=1.1.1,<2.0.0)"
+    "jupyter (>=1.1.1,<2.0.0)",
+    "pyarrow (>=21.0.0,<22.0.0)",
+    "python-dateutil (>=2.9.0.post0,<3.0.0)"
 ]
 
 
