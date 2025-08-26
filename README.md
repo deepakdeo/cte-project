@@ -148,4 +148,4 @@ CTE is designed for local analysis of personal data. All processing occurs on yo
 
 ## License
 
-MIT — see `LICENSE`.
+MIT — see [LICENSE](LICENSE).
