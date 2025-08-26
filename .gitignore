@@ -8,3 +8,4 @@ data/*
 models/
 mlruns/
 docs/portfolio-notes.md
+*.parquet
