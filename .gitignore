@@ -7,3 +7,4 @@ data/*
 !data/sample/**
 models/
 mlruns/
+docs/portfolio-notes.md
