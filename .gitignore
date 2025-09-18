@@ -14,3 +14,6 @@ docs/portfolio-notes.md
 !notebooks/reports/
 !notebooks/reports/**
 
+
+# Ignore Jupyter checkpoints
+notebooks/.ipynb_checkpoints/

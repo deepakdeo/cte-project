@@ -1,0 +1,36 @@
+{
+  "date_min": "2025-01-27",
+  "date_max": "2025-04-30",
+  "corr_sleep_duration_h_vs_productivity_pct": -0.288,
+  "corr_deep_sleep_pct_vs_productivity_pct": -0.138,
+  "corr_rem_sleep_pct_vs_productivity_pct": 0.018,
+  "mean_prod_by_breakfast_quality": {
+    "balanced": 32.69,
+    "carb_heavy": 40.82,
+    "protein_heavy": 28.89
+  },
+  "mean_prod_by_lunch_quality": {
+    "balanced": 41.17,
+    "carb_heavy": 37.6,
+    "protein_heavy": 52.5
+  },
+  "mean_prod_by_dinner_quality": {
+    "balanced": 48.91,
+    "carb_heavy": 36.82,
+    "protein_heavy": 27.17
+  },
+  "mean_prod_by_weekday": {
+    "Friday": 46.73,
+    "Monday": 52.27,
+    "Saturday": 26.67,
+    "Sunday": 19.56,
+    "Thursday": 14.2,
+    "Tuesday": 49.4,
+    "Wednesday": 48.75
+  },
+  "pearson_sleep_vs_prod": {
+    "r": -0.288,
+    "p": 0.0142,
+    "n": 72
+  }
+}
