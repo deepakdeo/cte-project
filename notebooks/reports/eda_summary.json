@@ -18,19 +18,5 @@
     "balanced": 48.91,
     "carb_heavy": 36.82,
     "protein_heavy": 27.17
-  },
-  "mean_prod_by_weekday": {
-    "Friday": 46.73,
-    "Monday": 52.27,
-    "Saturday": 26.67,
-    "Sunday": 19.56,
-    "Thursday": 14.2,
-    "Tuesday": 49.4,
-    "Wednesday": 48.75
-  },
-  "pearson_sleep_vs_prod": {
-    "r": -0.288,
-    "p": 0.0142,
-    "n": 72
   }
 }
