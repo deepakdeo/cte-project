@@ -9,3 +9,8 @@ models/
 mlruns/
 docs/portfolio-notes.md
 *.parquet
+# Keep EDA notebook + reports
+!notebooks/
+!notebooks/reports/
+!notebooks/reports/**
+
