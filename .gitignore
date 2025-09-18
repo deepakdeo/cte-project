@@ -17,3 +17,4 @@ docs/portfolio-notes.md
 
 # Ignore Jupyter checkpoints
 notebooks/.ipynb_checkpoints/
+/docs/
