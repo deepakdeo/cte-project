@@ -1,8 +1,13 @@
 # Character Traits Evaluator (CTE)
 
-A machine-learning pipeline that turns mixed personal-tracking data (sleep, mood, productivity, habits, daily reflections) into clean, model-ready features and interpretable behavioral insights.
+![CTE Overview](notebooks/reports/figures/cte_readme_overview.png)
 
-The system analyzes behavioral patterns to estimate personality traits and evaluates personality–job compatibility against specific role requirements. All processing runs locally for privacy; raw personal data is excluded from version control.
+A project that analyzes 27 wearable metrics and daily reflections, runs EDA/NLP/ML, and uses an LLM to profile traits and generate data-driven recommendations.
+
+
+Broadly, it is a machine-learning pipeline that turns mixed personal-tracking data (sleep, mood, productivity, habits, daily reflections) into clean, model-ready features and interpretable behavioral insights.
+
+The system analyzes behavioral patterns to estimate personality traits and evaluates personality, job compatibility against specific role requirements. All processing runs locally for privacy; raw personal data is excluded from version control.
 
 ## Overview
 
