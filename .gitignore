@@ -19,3 +19,10 @@ docs/portfolio-notes.md
 notebooks/.ipynb_checkpoints/
 /docs/
 .DS_Store
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
