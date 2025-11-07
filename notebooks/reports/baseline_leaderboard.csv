@@ -1,0 +1,5 @@
+model,cv_MAE,cv_RMSE,cv_R2,cv_MAPE%,holdout_MAE,holdout_RMSE,holdout_R2,holdout_MAPE%
+Ridge(alpha=1.0),15.016,19.584,0.142,53.275,9.59,10.47,0.937,56.3
+LinearRegression,15.462,20.114,0.094,58.075,9.64,10.95,0.931,63.8
+GBR(depth3),4.618,6.018,0.918,15.75,10.76,13.33,0.898,10.9
+RandomForest(d6),6.168,8.346,0.854,20.8,13.64,16.29,0.847,16.9

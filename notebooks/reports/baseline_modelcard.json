@@ -1,0 +1,46 @@
+{
+  "timestamp": "2025-11-07 15:10:22",
+  "dataset_rows": 72,
+  "n_features": 89,
+  "target": "productivity_pct",
+  "split": {
+    "train": 57,
+    "val": 15
+  },
+  "leaderboard_top": [
+    {
+      "model": "Ridge(alpha=1.0)",
+      "cv_MAE": 15.016,
+      "cv_RMSE": 19.584,
+      "cv_R2": 0.142,
+      "cv_MAPE%": 53.275,
+      "holdout_MAE": 9.59,
+      "holdout_RMSE": 10.47,
+      "holdout_R2": 0.937,
+      "holdout_MAPE%": 56.3
+    },
+    {
+      "model": "LinearRegression",
+      "cv_MAE": 15.462,
+      "cv_RMSE": 20.114,
+      "cv_R2": 0.094,
+      "cv_MAPE%": 58.075,
+      "holdout_MAE": 9.64,
+      "holdout_RMSE": 10.95,
+      "holdout_R2": 0.931,
+      "holdout_MAPE%": 63.8
+    },
+    {
+      "model": "GBR(depth3)",
+      "cv_MAE": 4.618,
+      "cv_RMSE": 6.018,
+      "cv_R2": 0.918,
+      "cv_MAPE%": 15.75,
+      "holdout_MAE": 10.76,
+      "holdout_RMSE": 13.33,
+      "holdout_R2": 0.898,
+      "holdout_MAPE%": 10.9
+    }
+  ],
+  "chosen_model": "Ridge(alpha=1.0)"
+}
