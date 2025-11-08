@@ -50,6 +50,21 @@ With **03_Baselines.ipynb**, the project now includes a predictive layer that co
 - Generated visual diagnostics (predicted vs true plots, residuals, feature importances)
 - Built model card and leaderboard export for reproducibility
 
+### Reflections (NLP quick look)
+The word cloud below is a quick, frequency-only visual of my daily reflections; it’s helpful for intuition, not inference.
+Substantive signals come from simple NLP features (sentiment, topic scores) and model metrics that relate those signals to `productivity_pct`.
+Pairing the cloud with a Top Keywords bar chart makes the takeaway clearer and reproducible
+
+<p align="center">
+  <img src="notebooks/reports/figures/reflections_wordcloud_classic.png" alt="Reflections Word Cloud" width="560"><br/>
+  <em>Frequency-only visual; see keyword chart for substance.</em>
+</p>
+
+<p align="center">
+  <img src="notebooks/reports/figures/reflections_top_keywords.png" alt="Top Keywords in Reflections" width="560">
+</p>
+
+
 ## Upcoming Work
 
 - Add lag and rolling features for temporal context
