@@ -43,7 +43,7 @@ I wanted to know how sleep, routines, and social context actually show up in my 
 
 - **Privacy-First**
   - All processing runs locally
-  - No external API calls or cloud dependencies
+  - Optional LLM calls; local-only path supported
   - Raw personal data excluded from version control
 
 - **Production-Ready Engineering**
@@ -75,7 +75,7 @@ Baseline snapshot (from `notebooks/reports/04_leaderboard.csv`):
 | Ridge | 26.04 | 32.32 | 0.193 | 43.40 | 48.06 | -0.462 |
 | GBR | 28.81 | 41.49 | -0.329 | 30.23 | 32.25 | 0.341 |
 
-See `notebooks/03_Baselines.ipynb` and `notebooks/reports/` for details.
+See `notebooks/03_Baselines.ipynb` and generated artifacts in `notebooks/reports/` (gitignored).
 
 ## Key Findings (EDA Snapshot)
 
@@ -92,27 +92,16 @@ See `docs/eda_summary.txt`.
 - Trait scoring is heuristic; use as guidance, not as a definitive judgment.
 - Best used for self-tracking and reflection, not for high-stakes decisions.
 
-### Reflections (NLP quick look)
-The word cloud below is a quick, frequency-only visual of my daily reflections; it’s helpful for intuition, not inference.
-Substantive signals come from simple NLP features (sentiment, topic scores) and model metrics that relate those signals to `productivity_pct`.
-Pairing the cloud with a Top Keywords bar chart makes the takeaway clearer and reproducible
-
-<p align="center">
-  <img src="notebooks/reports/figures/reflections_wordcloud_classic.png" alt="Reflections Word Cloud" width="560"><br/>
-  <em>Frequency-only visual; see keyword chart for substance.</em>
-</p>
-
-<p align="center">
-  <img src="notebooks/reports/figures/reflections_top_keywords.png" alt="Top Keywords in Reflections" width="560">
-</p>
+### Reflections (NLP)
+Reflections are analyzed with sentiment and lightweight trait signals. Visuals are generated in notebooks and excluded from git.
 
 
 ## Upcoming Work
 
-- Add lag and rolling features for temporal context
+- Integrate NLP features into modeling
 - Introduce XGBoost/LightGBM with hyperparameter tuning
-- Compare against baseline leaderboard
-- Explore SHAP for interpretability
+- Add SHAP-based interpretability and stronger model cards
+- Provide a multi-user demo path (sample persona + JD + reports)
 
 ## Quick Start
 
@@ -205,23 +194,34 @@ PYTHONPATH=src poetry run python scripts/cte_cli.py --persona path/to/06_profile
 cte-project/
 ├── data/
 │ ├── sample/
-│ │ └── cte_sample.csv         # small demo dataset (committed)
+│ │ ├── cte_sample.csv         # small demo dataset (committed)
+│ │ ├── sample_persona.json    # demo persona
+│ │ └── sample_jd.txt          # demo job description
 │ ├── raw/                     # your private raw data (gitignored)
 │ └── interim/                 # cleaned / feature data (gitignored)
+├── assets/
+│ └── cte_dashboard.png         # README screenshot
 ├── notebooks/
 │ ├── 01_Preprocessing.ipynb   # data cleaning
 │ ├── 02_Features.ipynb        # feature engineering
 │ ├── 03_Baselines.ipynb       # baseline modeling
-│ └── reports/
-│ ├── figures/                 # generated visual outputs
-│ └── baseline_leaderboard.csv # model leaderboard
+│ ├── 04_Modeling.ipynb        # advanced modeling
+│ ├── 05_TraitScoring.ipynb    # trait scoring
+│ ├── 06_Persona_LLM.ipynb     # persona generation
+│ └── reports/                 # generated outputs (gitignored)
 ├── models/                    # saved trained models (.joblib)
+├── scripts/                   # Streamlit app + CLI
 ├── src/
 │ └── cte/
 │ ├── init.py
 │ ├── data.py # cleaning pipeline (MVP)
 │ ├── features.py # feature engineering logic
-│ └── models.py # modeling utilities (future)
+│ ├── nlp.py # sentiment + trait extraction
+│ ├── requirements.py # JD parsing
+│ ├── scoring.py # job-fit scoring
+│ ├── report.py # report writer
+│ ├── openai_util.py # OpenAI helper
+│ └── persona.py # persona loading
 ├── .gitignore
 ├── poetry.lock
 ├── pyproject.toml
