@@ -281,6 +281,10 @@ with st.sidebar:
 
     # Persona
     with st.expander("📋 Persona Settings", expanded=True):
+        if "pending_persona_path" in st.session_state:
+            st.session_state["persona_path_input"] = st.session_state["pending_persona_path"]
+            st.session_state["persona_path"] = st.session_state["pending_persona_path"]
+            del st.session_state["pending_persona_path"]
         persona_path = st.text_input(
             "Persona JSON path",
             value=st.session_state["persona_path"],
@@ -342,10 +346,10 @@ with st.sidebar:
             ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
             outpath = outdir / f"persona_seeded_{ts}.json"
             outpath.write_text(json.dumps(persona, indent=2))
-            st.session_state["persona_path"] = str(outpath)
-            st.session_state["persona_path_input"] = str(outpath)
+            st.session_state["pending_persona_path"] = str(outpath)
             read_persona_cached.clear()
             st.success(f"Starter persona saved: {outpath}")
+            st.rerun()
 
     # Analysis
     with st.expander("🤖 Analysis Settings", expanded=False):
@@ -391,14 +395,14 @@ with st.sidebar:
     with st.expander("🧪 Demo Mode", expanded=False):
         st.caption("Load sample persona + JD for a 60-second demo.")
         if st.button("Load Demo Assets", use_container_width=True):
-            st.session_state["persona_path"] = "data/sample/sample_persona.json"
-            st.session_state["persona_path_input"] = "data/sample/sample_persona.json"
+            st.session_state["pending_persona_path"] = "data/sample/sample_persona.json"
             try:
                 st.session_state["jd_text"] = Path("data/sample/sample_jd.txt").read_text()
             except Exception:
                 st.session_state["jd_text"] = ""
             read_persona_cached.clear()
             st.success("Demo persona and JD loaded.")
+            st.rerun()
 
 # =========================
 # MAIN TABS
