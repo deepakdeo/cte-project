@@ -9,15 +9,22 @@ models/
 mlruns/
 docs/portfolio-notes.md
 *.parquet
-# Keep EDA notebook + reports
+# Keep notebooks, but ignore generated reports/outputs
 !notebooks/
-!notebooks/reports/
-!notebooks/reports/**
+notebooks/reports/
 
 
 # Ignore Jupyter checkpoints
 notebooks/.ipynb_checkpoints/
 /docs/
+**/*_updated*.json
+=1.45.0
+=1.51
+src/cte/nlp_backup_20251113.py
+scripts/cte_app_OG.py
+scripts/cte_app_claude.py
+scripts/cte_app_nov11.py
+jd.txt
 .DS_Store
 
 # Jupyter checkpoints
@@ -26,3 +33,4 @@ notebooks/.ipynb_checkpoints/
 # Jupyter checkpoints
 .ipynb_checkpoints/
 **/.ipynb_checkpoints/
+.env
