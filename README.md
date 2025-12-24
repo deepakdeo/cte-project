@@ -138,6 +138,11 @@ Sample inputs:
 - Persona: `data/sample/sample_persona.json`
 - JD: `data/sample/sample_jd.txt`
 
+Quick demo flow:
+1) Launch the app.
+2) In the sidebar, set the persona to `data/sample/sample_persona.json`.
+3) Paste the sample JD from `data/sample/sample_jd.txt` into the Evaluate Job tab.
+
 CLI usage:
 
 ```bash
