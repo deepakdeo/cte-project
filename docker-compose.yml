@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  cte-app:
+    build: .
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}

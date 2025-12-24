@@ -144,6 +144,12 @@ docker build -t cte-app .
 docker run --rm -p 8501:8501 cte-app
 ```
 
+Or with Docker Compose:
+
+```bash
+docker compose up --build
+```
+
 ## Demo (Streamlit App)
 
 Run the dashboard locally:
