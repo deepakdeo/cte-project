@@ -115,6 +115,10 @@ PYTHONPATH=src poetry run streamlit run scripts/cte_app.py
 Notes:
 - The sidebar expects a persona JSON (generated in `notebooks/06_Persona_LLM.ipynb`).
 - Set `OPENAI_API_KEY` in a `.env` file if you want LLM-based JD parsing and sentiment.
+ 
+Sample inputs:
+- Persona: `data/sample/sample_persona.json`
+- JD: `data/sample/sample_jd.txt`
 
 CLI usage:
 

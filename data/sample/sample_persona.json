@@ -1,0 +1,15 @@
+{
+  "name": "Sample Candidate",
+  "per_trait": {
+    "focus": {"score": 0.72, "confidence": 0.62, "evidence": []},
+    "communication": {"score": 0.68, "confidence": 0.58, "evidence": []},
+    "teamwork": {"score": 0.64, "confidence": 0.60, "evidence": []},
+    "planning": {"score": 0.59, "confidence": 0.55, "evidence": []},
+    "adaptability": {"score": 0.66, "confidence": 0.57, "evidence": []},
+    "learning_mindset": {"score": 0.74, "confidence": 0.61, "evidence": []},
+    "impact": {"score": 0.63, "confidence": 0.56, "evidence": []},
+    "reliability": {"score": 0.70, "confidence": 0.60, "evidence": []},
+    "resilience": {"score": 0.65, "confidence": 0.54, "evidence": []},
+    "independence": {"score": 0.67, "confidence": 0.59, "evidence": []}
+  }
+}

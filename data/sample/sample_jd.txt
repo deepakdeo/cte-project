@@ -1,0 +1,17 @@
+Senior Data Scientist
+
+We are looking for a Senior Data Scientist to build, evaluate, and deploy ML models.
+You will work with cross-functional partners to define success metrics, run experiments,
+and communicate findings to leadership.
+
+Responsibilities:
+- Design and implement production-ready models
+- Collaborate with engineers, product, and stakeholders
+- Present insights and recommendations clearly
+- Mentor junior team members
+
+Requirements:
+- Strong analytical thinking and attention to detail
+- Ownership and reliability in project delivery
+- Adaptability in ambiguous environments
+- Curiosity and a continuous learning mindset
