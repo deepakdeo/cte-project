@@ -1,11 +1,16 @@
 # Character Traits Evaluator (CTE)
 
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+![Poetry](https://img.shields.io/badge/poetry-managed-blue)
+![Streamlit](https://img.shields.io/badge/streamlit-app-red)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 ![CTE Overview](assets/cte_dashboard.png)
 
 A project that analyzes 27 wearable metrics and daily reflections, runs EDA/NLP/ML, and uses an LLM to profile traits and generate data-driven recommendations.
 
 
-Broadly, it is a machine-learning pipeline that turns mixed personal-tracking data (sleep, mood, productivity, habits, daily reflections) into clean, model-ready features and interpretable behavioral insights.
+CTE is a machine-learning pipeline that turns mixed personal-tracking data (sleep, mood, productivity, habits, daily reflections) into clean, model-ready features and interpretable behavioral insights.
 
 The system analyzes behavioral patterns to estimate personality traits and evaluates personality, job compatibility against specific role requirements. All processing runs locally for privacy; raw personal data is excluded from version control.
 
