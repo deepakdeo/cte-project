@@ -135,6 +135,15 @@ print('\nHead:\n', df.head(3))
 "
 ```
 
+### Docker (Optional)
+
+Build and run the demo app:
+
+```bash
+docker build -t cte-app .
+docker run --rm -p 8501:8501 cte-app
+```
+
 ## Demo (Streamlit App)
 
 Run the dashboard locally:
