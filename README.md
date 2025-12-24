@@ -205,6 +205,10 @@ cte-project/
 **Phase 6 — Deployment**  
 - FastAPI endpoints, Streamlit demo, Dockerization
 
+## Project Story (Recruiter One-Pager)
+
+See `docs/project_story.md`.
+
 ## Tech Stack
 
 - **Core**: Python 3.11, pandas, numpy

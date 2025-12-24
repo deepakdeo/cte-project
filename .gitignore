@@ -16,7 +16,8 @@ notebooks/reports/
 
 # Ignore Jupyter checkpoints
 notebooks/.ipynb_checkpoints/
-/docs/
+/docs/*
+!docs/project_story.md
 **/*_updated*.json
 =1.45.0
 =1.51
