@@ -1,6 +1,6 @@
 # Character Traits Evaluator (CTE)
 
-![CTE Overview](notebooks/reports/figures/cte_readme_overview.png)
+![CTE Overview](assets/cte_dashboard.png)
 
 A project that analyzes 27 wearable metrics and daily reflections, runs EDA/NLP/ML, and uses an LLM to profile traits and generate data-driven recommendations.
 
