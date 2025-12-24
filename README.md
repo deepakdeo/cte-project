@@ -266,6 +266,29 @@ PYTHONPATH=src poetry run python scripts/cte_cli.py \
 
 ---
 
+## Deploy Your Own
+
+### Streamlit Cloud (Free)
+
+1. Fork this repo
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Connect your GitHub and select the repo
+4. Set:
+   - Main file: `scripts/cte_app.py`
+   - Python version: 3.11
+5. Add secret `OPENAI_API_KEY` (optional, for LLM features)
+
+Your dashboard will be live at `https://your-app.streamlit.app`
+
+### Docker
+
+```bash
+docker compose up --build
+# Open http://localhost:8501
+```
+
+---
+
 ## Limitations & Responsible Use
 
 - **Not a hiring tool**: CTE is for self-reflection and career exploration, not employment decisions
@@ -289,14 +312,17 @@ PYTHONPATH=src poetry run python scripts/cte_cli.py \
 
 ## Roadmap
 
-- [x] **Phase 1**: Data cleaning pipeline
-- [x] **Phase 2**: Feature engineering
-- [x] **Phase 3**: Baseline modeling
-- [x] **Phase 4**: Synthetic data generator
-- [x] **Phase 5**: Test suite
-- [ ] **Phase 6**: FastAPI endpoints
-- [ ] **Phase 7**: Public dataset validation
-- [ ] **Phase 8**: Multi-user support
+- [x] Data cleaning pipeline
+- [x] Feature engineering
+- [x] Baseline modeling (Ridge, RF, GBM)
+- [x] NLP sentiment analysis
+- [x] Job-fit scoring system
+- [x] Streamlit dashboard
+- [x] Synthetic data generator
+- [x] Test suite (56 tests)
+- [x] CI/CD pipeline
+- [ ] Public dataset validation
+- [ ] FastAPI endpoints
 
 ---
 
