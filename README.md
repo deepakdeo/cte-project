@@ -59,6 +59,15 @@ Highlights from baseline modeling and diagnostics:
 
 See `notebooks/03_Baselines.ipynb` and `notebooks/reports/` for details.
 
+## Key Findings (EDA Snapshot)
+
+From early EDA on the 72-day sample:
+- Productivity aligns most with time-of-day self-reports (morning/afternoon/evening).
+- Sleep duration and naps show positive relationships with productivity.
+- Balanced dinners show higher average productivity vs heavier meals.
+
+See `docs/eda_summary.txt`.
+
 ### Reflections (NLP quick look)
 The word cloud below is a quick, frequency-only visual of my daily reflections; it’s helpful for intuition, not inference.
 Substantive signals come from simple NLP features (sentiment, topic scores) and model metrics that relate those signals to `productivity_pct`.
