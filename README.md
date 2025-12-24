@@ -63,6 +63,13 @@ Highlights from baseline modeling and diagnostics:
 - Feature importance + error analysis to surface top behavioral drivers
 - Consistent evaluation artifacts (leaderboard, residuals, pred-vs-true)
 
+Baseline snapshot (from `notebooks/reports/04_leaderboard.csv`):
+
+| Model | Val MAE | Val RMSE | Val R² | Test MAE | Test RMSE | Test R² |
+|---|---:|---:|---:|---:|---:|---:|
+| Ridge | 26.04 | 32.32 | 0.193 | 43.40 | 48.06 | -0.462 |
+| GBR | 28.81 | 41.49 | -0.329 | 30.23 | 32.25 | 0.341 |
+
 See `notebooks/03_Baselines.ipynb` and `notebooks/reports/` for details.
 
 ## Key Findings (EDA Snapshot)
