@@ -61,6 +61,10 @@ python_functions = "test_*"
 addopts = "-v --tb=short"
 
 [tool.poetry]
+name = "cte-project"
+version = "0.1.0"
+description = "Character Traits Evaluator – ML framework for behavioral tracking and job-fit scoring"
+authors = ["Deepak Deo"]
 packages = [
   { include = "cte", from = "src" }
 ]
