@@ -1,11 +1,16 @@
 # scripts/cte_app.py
-import json, datetime
+import sys
 from pathlib import Path
+
+# Add src to path for imports (needed for Streamlit Cloud)
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+import json, datetime
 import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
 
-# ---- Local imports (cte package must be importable; run with PYTHONPATH=src) ----
+# ---- Local imports ----
 from cte.persona import load_persona
 from cte.requirements import extract_requirements_llm, extract_requirements_hybrid, union_requirements
 from cte.scoring import score_requirements

@@ -55,12 +55,14 @@ poetry run python src/cte/data.py --in data/sample/my_data.csv --out data/sample
 PYTHONPATH=src poetry run python scripts/generate_demo_persona.py
 ```
 
-### Option C: Use Docker
+### Option C: Use Docker (requires Docker installed)
 
 ```bash
 docker compose up --build
 # Open http://localhost:8501
 ```
+
+Don't have Docker? Use Option A or B instead.
 
 ---
 
