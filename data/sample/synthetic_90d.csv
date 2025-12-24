@@ -1,0 +1,106 @@
+Date,Reflection,primary mood,secondary mood,"productivity
+percentage","when most 
+productive","studied 
+at home","studied 
+at school",breakfast qualtity,lunch quality,dinner quality,"water 
+drank","workout 
+did",meditation,"morning 
+shower","played 
+sports","interaction 
+w/ partner","interaction 
+w/ family","interaction 
+w/ friends",sickness,"sleep 
+duration","nap 
+today","deep sleep 
+percentage","REM sleep 
+percentage",dinner time,bed time,wakeup time
+"Sep 25, 2025",Felt in the zone today. Deep work session was particularly effective.,happy,content,77,1,no,no,balanced,protein_heavy,carb_heavy,2.7,no,yes,yes,no,neutral,neutral,neutral,no,7h48m,no,18,24,9:40 PM,10:44 PM,6:05 AM
+"Sep 26, 2025",Solid focus throughout the day. Made good progress on the project.,focused,content,77,1,yes,no,balanced,protein_heavy,balanced,2.3,yes,no,yes,no,na,na,neutral,no,6h59m,no,13,21,8:26 PM,10:34 PM,6:30 AM
+"Sep 27, 2025",Made progress but not as much as I hoped. Some interruptions.,calm,relaxed,53,3,no,no,carb_heavy,protein_heavy,fat_heavy,2.3,yes,no,yes,no,positive,positive,na,no,8h28m,no,18,17,7:30 PM,11:54 PM,8:33 AM
+"Sep 28, 2025",Steady day. Nothing exceptional but got the basics done.,calm,tired,53,3,no,no,balanced,protein_heavy,carb_heavy,2.0,yes,no,no,no,positive,positive,na,no,8h9m,no,13,22,9:05 PM,11:25 PM,7:39 AM
+"Sep 29, 2025","Mixed bag today. Morning was good, afternoon was slower.",neutral,relaxed,68,1,yes,yes,carb_heavy,fat_heavy,carb_heavy,3.4,no,yes,no,no,neutral,positive,positive,no,6h28m,no,18,20,7:53 PM,11:00 PM,6:19 AM
+"Sep 30, 2025",Okay productivity. Had to context-switch more than I'd like.,calm,tired,58,23,no,yes,balanced,balanced,fat_heavy,2.2,no,yes,yes,no,positive,na,neutral,no,5h49m,no,21,28,8:01 PM,10:53 PM,6:13 AM
+"Oct 01, 2025",Decent day overall. Some distractions but managed to stay on track.,calm,tired,67,12,no,yes,carb_heavy,balanced,fat_heavy,2.1,yes,no,yes,no,na,positive,positive,no,7h5m,no,20,19,8:48 PM,9:51 PM,5:15 AM
+"Oct 02, 2025",Everything clicked today. Efficient workflow and clear thinking.,energetic,energetic,74,12,yes,no,balanced,carb_heavy,balanced,3.3,no,no,yes,no,neutral,neutral,na,no,7h31m,yes,26,19,6:55 PM,10:13 PM,5:27 AM
+"Oct 03, 2025",Okay productivity. Had to context-switch more than I'd like.,neutral,relaxed,65,123,no,yes,carb_heavy,protein_heavy,balanced,2.5,yes,no,yes,yes,positive,na,na,no,9h42m,yes,19,23,7:40 PM,10:30 PM,5:52 AM
+"Oct 04, 2025",Steady day. Nothing exceptional but got the basics done.,productive,relaxed,51,2,yes,no,carb_heavy,carb_heavy,carb_heavy,2.8,yes,no,yes,yes,neutral,neutral,neutral,no,7h33m,no,19,21,7:41 PM,9:51 PM,8:58 AM
+"Oct 05, 2025",Felt overwhelmed and couldn't prioritize well.,tired,anxious,33,3,no,no,fat_heavy,fat_heavy,balanced,2.7,yes,no,yes,no,neutral,neutral,neutral,no,7h47m,no,19,27,6:05 PM,11:34 PM,8:13 AM
+"Oct 06, 2025",Everything clicked today. Efficient workflow and clear thinking.,happy,motivated,84,123,no,no,fat_heavy,fat_heavy,balanced,3.2,yes,no,yes,no,neutral,na,na,no,6h19m,no,27,23,8:44 PM,11:46 PM,7:55 AM
+"Oct 07, 2025",Decent day overall. Some distractions but managed to stay on track.,calm,neutral,54,2,yes,no,fat_heavy,balanced,balanced,2.5,yes,yes,yes,no,neutral,na,neutral,no,7h44m,no,21,27,6:27 PM,9:58 PM,5:09 AM
+"Oct 08, 2025",Decent day overall. Some distractions but managed to stay on track.,productive,relaxed,49,23,no,yes,na,carb_heavy,carb_heavy,2.3,no,yes,no,no,na,neutral,na,no,8h1m,no,19,25,6:14 PM,9:48 PM,5:58 AM
+"Oct 09, 2025","Productive morning session, got through most of my priority items.",focused,content,74,123,yes,yes,balanced,protein_heavy,balanced,1.4,yes,no,yes,no,na,positive,neutral,no,8h14m,no,25,20,7:27 PM,9:35 PM,5:50 AM
+"Oct 10, 2025",Solid focus throughout the day. Made good progress on the project.,energetic,motivated,92,1,no,no,carb_heavy,protein_heavy,protein_heavy,2.4,no,no,yes,no,positive,positive,positive,no,7h49m,no,18,21,7:35 PM,9:13 PM,8:08 AM
+"Oct 11, 2025",Made progress but not as much as I hoped. Some interruptions.,neutral,tired,64,12,no,no,fat_heavy,protein_heavy,fat_heavy,2.6,yes,no,yes,no,na,positive,positive,no,7h12m,no,18,26,6:49 PM,11:26 PM,6:32 AM
+"Oct 12, 2025",Struggled to focus today. Felt scattered and unfocused.,stressed,anxious,38,3,no,no,carb_heavy,fat_heavy,carb_heavy,2.7,no,yes,yes,no,neutral,neutral,na,no,8h23m,no,27,20,9:55 PM,11:45 PM,9:50 AM
+"Oct 13, 2025",High energy day. Accomplished more than expected.,energetic,energetic,71,1,no,no,balanced,carb_heavy,fat_heavy,2.6,yes,yes,yes,no,positive,neutral,neutral,no,6h33m,no,16,18,7:23 PM,9:01 PM,5:17 AM
+"Oct 14, 2025",Solid focus throughout the day. Made good progress on the project.,energetic,energetic,74,1,no,no,balanced,fat_heavy,balanced,0.8,yes,no,yes,no,neutral,positive,positive,no,6h44m,no,16,23,9:58 PM,10:59 PM,8:06 AM
+"Oct 15, 2025","Mixed bag today. Morning was good, afternoon was slower.",calm,tired,46,23,no,no,balanced,carb_heavy,carb_heavy,1.6,no,no,yes,yes,neutral,neutral,neutral,no,7h4m,no,21,20,7:00 PM,10:26 PM,7:29 AM
+"Oct 16, 2025",Made progress but not as much as I hoped. Some interruptions.,calm,relaxed,61,123,yes,no,balanced,carb_heavy,balanced,2.6,yes,no,yes,no,positive,positive,neutral,no,7h58m,no,14,15,7:06 PM,11:54 PM,6:29 AM
+"Oct 17, 2025",Steady day. Nothing exceptional but got the basics done.,productive,relaxed,69,123,yes,no,protein_heavy,fat_heavy,fat_heavy,2.4,no,no,yes,no,positive,positive,positive,no,6h23m,no,22,24,8:28 PM,11:51 PM,6:38 AM
+"Oct 18, 2025",Decent day overall. Some distractions but managed to stay on track.,calm,neutral,60,1,no,no,na,carb_heavy,fat_heavy,2.9,yes,no,yes,no,na,na,positive,no,7h3m,yes,15,18,7:17 PM,11:23 PM,8:29 AM
+"Oct 19, 2025",Not feeling well today. Took it easy and rested.,tired,neutral,13,5,no,no,balanced,protein_heavy,carb_heavy,1.5,no,no,yes,no,positive,na,na,yes,6h27m,yes,21,23,6:28 PM,9:01 PM,8:48 AM
+"Oct 20, 2025",Felt overwhelmed and couldn't prioritize well.,stressed,tired,37,2,no,yes,balanced,balanced,balanced,2.5,no,no,yes,no,positive,positive,na,no,8h41m,no,11,22,9:42 PM,9:50 PM,5:51 AM
+"Oct 21, 2025",Steady day. Nothing exceptional but got the basics done.,productive,tired,70,1,no,yes,carb_heavy,balanced,balanced,2.1,yes,no,yes,yes,na,positive,neutral,no,7h45m,no,19,26,6:11 PM,10:52 PM,7:50 AM
+"Oct 22, 2025",Great day! Managed to complete all my tasks and felt really focused.,focused,motivated,90,1,no,no,na,protein_heavy,carb_heavy,1.5,yes,yes,yes,no,na,na,neutral,no,7h50m,no,14,14,7:22 PM,10:38 PM,5:45 AM
+"Oct 23, 2025",Everything clicked today. Efficient workflow and clear thinking.,energetic,motivated,85,1,no,no,protein_heavy,balanced,protein_heavy,4.0,no,yes,yes,no,positive,neutral,positive,no,5h0m,yes,20,23,6:01 PM,10:09 PM,6:19 AM
+"Oct 24, 2025",Made progress but not as much as I hoped. Some interruptions.,calm,tired,58,3,yes,yes,balanced,carb_heavy,protein_heavy,2.1,no,no,yes,yes,neutral,neutral,positive,no,6h31m,no,21,27,6:50 PM,9:48 PM,6:16 AM
+"Oct 25, 2025",Average day. Some tasks took longer than expected.,calm,neutral,46,23,no,no,balanced,balanced,protein_heavy,1.6,yes,yes,yes,no,na,positive,neutral,no,7h5m,no,26,28,7:02 PM,9:14 PM,8:43 AM
+"Oct 26, 2025",Okay productivity. Had to context-switch more than I'd like.,productive,relaxed,50,3,no,no,fat_heavy,protein_heavy,na,2.7,yes,yes,no,no,positive,positive,neutral,no,7h37m,no,22,12,7:28 PM,9:22 PM,8:31 AM
+"Oct 27, 2025",Felt in the zone today. Deep work session was particularly effective.,focused,energetic,83,123,no,no,na,protein_heavy,na,2.8,no,yes,no,no,na,na,positive,no,6h20m,no,23,18,6:04 PM,10:27 PM,5:43 AM
+"Oct 28, 2025","Productive morning session, got through most of my priority items.",happy,content,72,123,yes,no,balanced,balanced,fat_heavy,2.7,no,no,no,no,neutral,neutral,positive,no,7h57m,no,23,22,8:39 PM,11:07 PM,6:50 AM
+"Oct 29, 2025","Mixed bag today. Morning was good, afternoon was slower.",neutral,tired,58,23,yes,no,protein_heavy,balanced,balanced,2.2,yes,yes,yes,no,positive,positive,positive,no,6h15m,no,17,22,8:19 PM,11:26 PM,7:21 AM
+"Oct 30, 2025",Steady day. Nothing exceptional but got the basics done.,focused,relaxed,69,123,no,no,fat_heavy,balanced,protein_heavy,2.5,no,no,yes,no,positive,neutral,na,no,8h28m,no,20,18,7:08 PM,11:14 PM,6:14 AM
+"Oct 31, 2025",Made progress but not as much as I hoped. Some interruptions.,neutral,tired,57,2,no,no,balanced,carb_heavy,carb_heavy,2.0,no,no,yes,yes,positive,neutral,neutral,no,7h16m,no,20,28,8:10 PM,11:58 PM,6:07 AM
+"Nov 01, 2025","Mixed bag today. Morning was good, afternoon was slower.",productive,tired,42,23,no,no,balanced,na,fat_heavy,1.6,yes,no,yes,no,na,na,neutral,no,8h5m,no,19,21,6:08 PM,11:01 PM,9:49 AM
+"Nov 02, 2025","Mixed bag today. Morning was good, afternoon was slower.",focused,relaxed,70,12,no,no,protein_heavy,carb_heavy,na,2.0,no,no,yes,no,na,positive,positive,no,7h14m,no,17,25,6:27 PM,11:52 PM,8:11 AM
+"Nov 03, 2025",Decent day overall. Some distractions but managed to stay on track.,productive,tired,59,2,no,no,protein_heavy,balanced,protein_heavy,2.4,no,yes,yes,no,positive,neutral,na,no,6h18m,no,20,16,7:10 PM,10:46 PM,6:33 AM
+"Nov 04, 2025",Solid focus throughout the day. Made good progress on the project.,productive,motivated,79,1,no,yes,carb_heavy,protein_heavy,carb_heavy,3.6,no,yes,yes,no,neutral,neutral,positive,no,8h30m,no,13,15,7:06 PM,11:07 PM,5:24 AM
+"Nov 05, 2025","Mixed bag today. Morning was good, afternoon was slower.",neutral,relaxed,61,1,no,no,protein_heavy,fat_heavy,protein_heavy,2.6,no,yes,no,no,na,positive,positive,no,7h54m,no,25,22,6:23 PM,9:43 PM,6:19 AM
+"Nov 06, 2025",Everything clicked today. Efficient workflow and clear thinking.,productive,motivated,79,12,yes,no,fat_heavy,protein_heavy,balanced,2.6,yes,yes,yes,no,positive,positive,neutral,no,9h1m,no,20,20,8:09 PM,10:33 PM,8:54 AM
+"Nov 07, 2025","Mixed bag today. Morning was good, afternoon was slower.",calm,tired,67,123,no,no,balanced,balanced,fat_heavy,2.2,no,yes,yes,no,positive,positive,neutral,no,5h29m,no,15,27,8:07 PM,10:07 PM,5:19 AM
+"Nov 08, 2025",Great day! Managed to complete all my tasks and felt really focused.,focused,energetic,73,1,no,no,na,fat_heavy,carb_heavy,2.6,no,yes,yes,no,positive,positive,neutral,no,7h54m,no,22,25,7:21 PM,10:38 PM,10:53 AM
+"Nov 09, 2025",Great day! Managed to complete all my tasks and felt really focused.,energetic,energetic,82,1,yes,no,carb_heavy,balanced,protein_heavy,2.0,yes,no,yes,yes,na,positive,na,no,6h58m,yes,22,17,6:42 PM,11:07 PM,9:42 AM
+"Nov 10, 2025","Mixed bag today. Morning was good, afternoon was slower.",focused,tired,69,123,no,no,protein_heavy,carb_heavy,na,2.4,no,no,yes,no,neutral,positive,na,no,7h54m,no,11,29,6:02 PM,11:30 PM,7:23 AM
+"Nov 11, 2025",Okay productivity. Had to context-switch more than I'd like.,neutral,neutral,61,1,no,no,protein_heavy,na,protein_heavy,2.8,no,yes,yes,no,neutral,positive,neutral,no,7h10m,no,15,25,7:10 PM,11:54 PM,7:34 AM
+"Nov 12, 2025",Average day. Some tasks took longer than expected.,neutral,neutral,67,12,no,no,balanced,na,fat_heavy,2.0,yes,no,yes,yes,positive,neutral,positive,no,6h37m,no,19,30,8:55 PM,10:20 PM,6:18 AM
+"Nov 13, 2025",Solid focus throughout the day. Made good progress on the project.,productive,motivated,77,1,no,yes,protein_heavy,balanced,carb_heavy,2.5,no,yes,yes,no,neutral,neutral,na,no,6h38m,no,24,17,7:18 PM,10:14 PM,6:44 AM
+"Nov 14, 2025",Average day. Some tasks took longer than expected.,calm,neutral,46,23,no,no,protein_heavy,balanced,protein_heavy,2.2,yes,no,yes,no,positive,positive,neutral,no,6h25m,no,27,21,7:49 PM,9:59 PM,5:37 AM
+"Nov 15, 2025",Decent day overall. Some distractions but managed to stay on track.,calm,neutral,63,12,no,no,balanced,balanced,protein_heavy,2.3,no,no,yes,yes,neutral,positive,positive,no,7h4m,no,22,16,6:24 PM,10:45 PM,7:28 AM
+"Nov 16, 2025",Okay productivity. Had to context-switch more than I'd like.,calm,tired,61,1,no,no,protein_heavy,protein_heavy,balanced,2.2,no,no,yes,no,positive,na,neutral,no,6h46m,no,22,27,7:20 PM,10:48 PM,7:43 AM
+"Nov 17, 2025",Made progress but not as much as I hoped. Some interruptions.,calm,relaxed,41,3,no,no,balanced,carb_heavy,protein_heavy,2.0,no,no,yes,no,positive,neutral,positive,no,5h9m,no,19,22,9:24 PM,9:30 PM,6:28 AM
+"Nov 18, 2025",Under the weather. Did only essential tasks.,tired,neutral,21,5,no,yes,protein_heavy,balanced,balanced,2.9,no,no,yes,no,positive,positive,neutral,yes,7h49m,yes,10,25,8:30 PM,10:40 PM,5:38 AM
+"Nov 19, 2025",Great day! Managed to complete all my tasks and felt really focused.,productive,content,81,123,no,no,protein_heavy,fat_heavy,carb_heavy,2.3,yes,no,no,no,positive,positive,neutral,no,6h48m,no,22,21,6:56 PM,10:36 PM,5:14 AM
+"Nov 20, 2025","Mixed bag today. Morning was good, afternoon was slower.",calm,relaxed,53,3,yes,no,balanced,balanced,fat_heavy,1.9,yes,yes,no,yes,positive,na,neutral,no,5h59m,no,21,13,7:26 PM,11:07 PM,6:03 AM
+"Nov 21, 2025",Hard to concentrate. Too many distractions and interruptions.,tired,neutral,27,5,yes,no,na,carb_heavy,carb_heavy,2.3,no,no,yes,no,neutral,neutral,neutral,no,7h20m,yes,19,16,7:28 PM,11:10 PM,5:34 AM
+"Nov 22, 2025",Made progress but not as much as I hoped. Some interruptions.,focused,tired,69,123,no,no,balanced,fat_heavy,fat_heavy,3.2,no,yes,yes,no,neutral,na,neutral,no,7h36m,no,17,18,8:19 PM,10:24 PM,6:03 AM
+"Nov 23, 2025",Average day. Some tasks took longer than expected.,productive,relaxed,59,2,no,no,carb_heavy,fat_heavy,fat_heavy,2.9,no,no,yes,no,positive,na,positive,no,10h0m,no,20,23,7:01 PM,9:42 PM,7:45 AM
+"Nov 24, 2025",Everything clicked today. Efficient workflow and clear thinking.,happy,energetic,72,1,no,no,balanced,protein_heavy,protein_heavy,1.9,no,yes,no,no,neutral,neutral,neutral,no,6h56m,no,26,25,9:26 PM,11:18 PM,5:13 AM
+"Nov 25, 2025",Steady day. Nothing exceptional but got the basics done.,neutral,neutral,67,12,no,no,carb_heavy,protein_heavy,balanced,1.5,no,yes,yes,no,na,positive,positive,no,7h16m,no,23,24,7:50 PM,10:01 PM,5:32 AM
+"Nov 26, 2025",Solid focus throughout the day. Made good progress on the project.,energetic,motivated,91,123,no,yes,balanced,balanced,protein_heavy,3.3,yes,no,yes,no,positive,na,neutral,no,8h9m,no,21,14,6:13 PM,10:36 PM,6:14 AM
+"Nov 27, 2025",Steady day. Nothing exceptional but got the basics done.,calm,neutral,60,2,yes,no,carb_heavy,balanced,na,2.3,yes,yes,yes,no,neutral,positive,na,no,8h31m,no,10,27,7:34 PM,9:38 PM,5:02 AM
+"Nov 28, 2025",Felt overwhelmed and couldn't prioritize well.,neutral,anxious,37,3,no,no,balanced,protein_heavy,protein_heavy,1.5,no,no,yes,no,neutral,positive,negative,no,6h24m,yes,18,15,9:45 PM,9:20 PM,5:51 AM
+"Nov 29, 2025",Okay productivity. Had to context-switch more than I'd like.,calm,relaxed,42,2,no,no,balanced,na,carb_heavy,1.9,no,yes,no,no,positive,positive,positive,no,7h44m,yes,24,14,7:27 PM,11:20 PM,8:50 AM
+"Nov 30, 2025",Made progress but not as much as I hoped. Some interruptions.,focused,neutral,44,2,no,no,balanced,balanced,balanced,3.5,yes,yes,yes,no,na,positive,na,no,7h31m,yes,13,26,8:00 PM,11:27 PM,7:04 AM
+"Dec 01, 2025","Productive morning session, got through most of my priority items.",energetic,content,73,123,no,yes,balanced,protein_heavy,protein_heavy,1.9,yes,no,yes,no,positive,positive,positive,no,9h16m,no,18,26,8:21 PM,10:30 PM,5:15 AM
+"Dec 02, 2025",Decent day overall. Some distractions but managed to stay on track.,calm,neutral,56,3,yes,no,carb_heavy,balanced,balanced,1.5,yes,yes,yes,yes,positive,na,neutral,no,6h44m,no,19,26,7:56 PM,10:55 PM,6:04 AM
+"Dec 03, 2025",Decent day overall. Some distractions but managed to stay on track.,productive,neutral,58,23,yes,no,balanced,fat_heavy,balanced,2.3,yes,yes,yes,no,neutral,neutral,positive,no,5h31m,no,16,15,6:05 PM,10:02 PM,8:22 AM
+"Dec 04, 2025",Everything clicked today. Efficient workflow and clear thinking.,happy,motivated,81,123,yes,yes,balanced,balanced,protein_heavy,2.2,yes,yes,yes,no,positive,positive,neutral,no,7h13m,no,22,26,7:34 PM,10:58 PM,6:40 AM
+"Dec 05, 2025",Everything clicked today. Efficient workflow and clear thinking.,happy,content,80,1,yes,no,carb_heavy,protein_heavy,carb_heavy,1.6,yes,no,yes,yes,positive,positive,positive,no,7h8m,no,17,18,8:55 PM,11:46 PM,7:35 AM
+"Dec 06, 2025","Mixed bag today. Morning was good, afternoon was slower.",neutral,neutral,42,3,no,no,na,protein_heavy,carb_heavy,1.6,yes,no,yes,no,neutral,na,positive,no,5h47m,yes,23,25,7:11 PM,11:22 PM,7:28 AM
+"Dec 07, 2025",Decent day overall. Some distractions but managed to stay on track.,neutral,relaxed,45,23,no,no,na,balanced,fat_heavy,3.3,no,no,yes,no,positive,positive,neutral,no,7h19m,no,20,19,7:52 PM,10:31 PM,8:32 AM
+"Dec 08, 2025","Productive morning session, got through most of my priority items.",energetic,motivated,72,12,yes,no,protein_heavy,balanced,protein_heavy,2.5,no,yes,yes,no,na,positive,na,no,8h4m,no,26,18,8:05 PM,9:28 PM,6:12 AM
+"Dec 09, 2025",Solid focus throughout the day. Made good progress on the project.,energetic,content,88,12,yes,no,balanced,na,na,2.6,yes,yes,yes,no,na,neutral,positive,no,7h49m,no,17,14,7:49 PM,10:18 PM,7:59 AM
+"Dec 10, 2025",Everything clicked today. Efficient workflow and clear thinking.,productive,motivated,100,12,yes,yes,balanced,na,na,1.9,yes,no,yes,no,positive,positive,positive,no,7h51m,yes,20,27,8:05 PM,10:49 PM,6:34 AM
+"Dec 11, 2025",High energy day. Accomplished more than expected.,focused,motivated,70,1,no,no,balanced,balanced,protein_heavy,2.4,yes,yes,yes,no,na,na,neutral,no,7h59m,yes,24,26,6:45 PM,11:20 PM,7:21 AM
+"Dec 12, 2025",Everything clicked today. Efficient workflow and clear thinking.,happy,motivated,71,1,yes,no,fat_heavy,protein_heavy,balanced,1.6,no,no,yes,no,positive,positive,neutral,no,8h18m,no,16,25,9:09 PM,10:11 PM,5:05 AM
+"Dec 13, 2025",Okay productivity. Had to context-switch more than I'd like.,focused,relaxed,41,2,no,no,protein_heavy,balanced,protein_heavy,2.4,no,yes,yes,no,neutral,na,neutral,no,5h3m,no,23,20,6:47 PM,11:17 PM,8:45 AM
+"Dec 14, 2025",Brain fog most of the day. Need to rest more.,tired,anxious,19,5,yes,no,protein_heavy,balanced,protein_heavy,1.9,yes,no,yes,no,na,na,negative,no,7h47m,no,20,29,7:48 PM,11:02 PM,6:40 AM
+"Dec 15, 2025",Struggled to focus today. Felt scattered and unfocused.,neutral,neutral,35,23,no,yes,fat_heavy,na,balanced,2.7,no,no,yes,no,positive,neutral,neutral,no,6h32m,yes,25,20,6:21 PM,9:05 PM,5:15 AM
+"Dec 16, 2025",Average day. Some tasks took longer than expected.,productive,neutral,46,3,yes,no,balanced,balanced,na,3.3,no,yes,no,no,neutral,positive,neutral,no,6h18m,no,24,28,8:10 PM,11:26 PM,6:33 AM
+"Dec 17, 2025",Average day. Some tasks took longer than expected.,productive,tired,65,123,yes,no,balanced,balanced,carb_heavy,3.2,yes,yes,yes,yes,neutral,na,neutral,no,8h35m,no,27,24,7:17 PM,11:41 PM,5:15 AM
+"Dec 18, 2025",Everything clicked today. Efficient workflow and clear thinking.,energetic,motivated,78,123,yes,no,balanced,na,balanced,2.5,yes,no,no,no,neutral,neutral,na,no,9h23m,yes,18,30,7:21 PM,10:03 PM,5:20 AM
+"Dec 19, 2025",Okay productivity. Had to context-switch more than I'd like.,focused,neutral,61,12,yes,no,fat_heavy,fat_heavy,protein_heavy,3.6,no,no,no,no,na,neutral,neutral,no,5h24m,no,16,18,8:49 PM,9:49 PM,7:14 AM
+"Dec 20, 2025",Made progress but not as much as I hoped. Some interruptions.,focused,tired,62,12,no,no,balanced,fat_heavy,protein_heavy,3.0,no,no,yes,no,positive,positive,neutral,no,7h50m,no,24,17,7:26 PM,11:34 PM,6:43 AM
+"Dec 21, 2025",Okay productivity. Had to context-switch more than I'd like.,productive,tired,64,123,no,no,protein_heavy,protein_heavy,balanced,2.2,no,no,yes,no,neutral,positive,positive,no,6h49m,no,19,25,6:33 PM,11:31 PM,7:40 AM
+"Dec 22, 2025",High energy day. Accomplished more than expected.,productive,energetic,96,12,no,yes,carb_heavy,fat_heavy,protein_heavy,1.8,yes,yes,no,no,na,neutral,na,no,8h56m,no,18,21,8:33 PM,9:11 PM,6:38 AM
+"Dec 23, 2025",Great day! Managed to complete all my tasks and felt really focused.,productive,energetic,83,123,no,yes,carb_heavy,carb_heavy,balanced,1.4,no,yes,yes,no,na,neutral,neutral,no,7h59m,no,22,23,6:01 PM,11:55 PM,6:45 AM

@@ -1,0 +1,63 @@
+{
+  "name": "Demo User",
+  "created": "2025-12-24T13:50:54.985322",
+  "data_source": "synthetic_90d",
+  "per_trait": {
+    "focus": {
+      "score": 0.623,
+      "confidence": 0.942,
+      "evidence": [
+        {
+          "ts": "2025-12-24T13:50:54.984444",
+          "desc": "Avg productivity: 62%",
+          "link": null
+        }
+      ]
+    },
+    "planning": {
+      "score": 0.631,
+      "confidence": 0.8,
+      "evidence": []
+    },
+    "communication": {
+      "score": 0.696,
+      "confidence": 0.8,
+      "evidence": []
+    },
+    "teamwork": {
+      "score": 0.599,
+      "confidence": 0.8,
+      "evidence": []
+    },
+    "adaptability": {
+      "score": 0.9,
+      "confidence": 0.8,
+      "evidence": []
+    },
+    "learning_mindset": {
+      "score": 0.628,
+      "confidence": 0.8,
+      "evidence": []
+    },
+    "impact": {
+      "score": 0.638,
+      "confidence": 0.8,
+      "evidence": []
+    },
+    "reliability": {
+      "score": 0.59,
+      "confidence": 0.8,
+      "evidence": []
+    },
+    "resilience": {
+      "score": 0.678,
+      "confidence": 0.8,
+      "evidence": []
+    },
+    "independence": {
+      "score": 0.473,
+      "confidence": 0.8,
+      "evidence": []
+    }
+  }
+}

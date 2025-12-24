@@ -1,308 +1,316 @@
-# Character Traits Evaluator (CTE)
+# CTE — Character Traits Evaluator
 
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![Poetry](https://img.shields.io/badge/poetry-managed-blue)
 ![Streamlit](https://img.shields.io/badge/streamlit-app-red)
+![Tests](https://img.shields.io/badge/tests-56%20passed-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ![CTE Overview](assets/cte_overview.png)
 
-A project that analyzes 27 wearable metrics and daily reflections, runs EDA/NLP/ML, and uses an LLM to profile traits and generate data-driven recommendations.
+**A reusable ML framework for behavioral self-tracking, personality trait extraction, and job-fit evaluation.**
 
+CTE provides a complete pipeline from raw behavioral data to actionable career insights. Whether you're tracking your own productivity patterns or building a workforce analytics tool, CTE offers the building blocks you need.
 
-CTE is a machine-learning pipeline that turns mixed personal-tracking data (sleep, mood, productivity, habits, daily reflections) into clean, model-ready features and interpretable behavioral insights.
+---
 
-The system analyzes behavioral patterns to estimate personality traits and evaluates personality, job compatibility against specific role requirements. All processing runs locally for privacy; raw personal data is excluded from version control.
+## What CTE Does
 
-## Overview
+```
+Raw Behavioral Data → Clean Features → ML Models → Trait Profile → Job-Fit Score
+```
 
-I wanted to know how sleep, routines, and social context actually show up in my day-to-day work productivity and performance. So I tracked 27 different parameters - sleep, mood, productivity, habits, and daily reflections - for 72 days.
+1. **Data Cleaning** — Robust, deterministic parsing for messy self-tracking data
+2. **Feature Engineering** — Temporal features, cyclical encodings, rolling statistics
+3. **Trait Extraction** — Convert behavioral patterns into personality scores
+4. **Job-Fit Scoring** — Match traits against job requirements with explainable verdicts
 
-**CTE** takes those raw logs (timestamps, durations, booleans, text), cleans them with deterministic rules (fixed formats, no guessing), and produces a tidy, typed Parquet table that’s ready for feature engineering and modeling.
+---
 
-> **Status:** Phase 3 (feature engineering and baseline modeling complete, moving toward advanced modeling) ✅
+## Quick Start (30 seconds)
 
-## Impact (What This Demonstrates)
-
-- End-to-end DS workflow: data cleaning, feature engineering, modeling, NLP, evaluation.
-- Reproducibility: typed Parquet outputs, deterministic parsing, time-aware validation.
-- Product thinking: interactive dashboard + CLI and a job-fit scoring layer.
-
-
-## Current Features
-
-- **Robust Data Cleaning**
-  - Header normalization and schema standardization
-  - Deterministic date parsing with default-year fallback
-  - Time parsing to **minutes-after-midnight** features (`*_time_minutes`)
-  - Duration parsing (e.g., `7h38m`, `7:38`) to decimal hours
-  - Flexible boolean coercion (`yes/no/y/n/true/false/t/f/1/0`)
-  - Social interaction encoding with **no-interaction flags**
-  - Percentage/number coercion with validation and clipping
-  - “When most productive” codebook decoding + one-hot indicators
-
-- **Privacy-First**
-  - All processing runs locally
-  - Optional LLM calls; local-only path supported
-  - Raw personal data excluded from version control
-
-- **Production-Ready Engineering**
-  - Type-safe transformations with explicit parsing rules
-  - CLI interface with argument parsing
-  - Reproducible environment via Poetry + Python 3.11
-
-## Recent Progress
-
-With **03_Baselines.ipynb**, the project now includes a predictive layer that connects behavioral features to daily productivity.
-
-- Implemented time-aware baseline models (Linear, Ridge, Random Forest, Gradient Boosting)
-- Added regression metrics (MAE, RMSE, R², MAPE)
-- Introduced expanding-window cross-validation for temporal consistency
-- Generated visual diagnostics (predicted vs true plots, residuals, feature importances)
-- Built model card and leaderboard export for reproducibility
-
-## Results & Evaluation
-
-Highlights from baseline modeling and diagnostics:
-- Time-aware CV across multiple baselines (Linear/Ridge/RandomForest/GBRT)
-- Feature importance + error analysis to surface top behavioral drivers
-- Consistent evaluation artifacts (leaderboard, residuals, pred-vs-true)
-
-Baseline snapshot (from `notebooks/reports/04_leaderboard.csv`):
-
-| Model | Val MAE | Val RMSE | Val R² | Test MAE | Test RMSE | Test R² |
-|---|---:|---:|---:|---:|---:|---:|
-| Ridge | 26.04 | 32.32 | 0.193 | 43.40 | 48.06 | -0.462 |
-| GBR | 28.81 | 41.49 | -0.329 | 30.23 | 32.25 | 0.341 |
-
-See `notebooks/03_Baselines.ipynb` and generated artifacts in `notebooks/reports/` (gitignored).
-
-## Key Findings (EDA Snapshot)
-
-From early EDA on the 72-day sample:
-- Productivity aligns most with time-of-day self-reports (morning/afternoon/evening).
-- Sleep duration and naps show positive relationships with productivity.
-- Balanced dinners show higher average productivity vs heavier meals.
-
-See `docs/eda_summary.txt`.
-
-## Limitations & Responsible Use
-
-- Small, single-subject dataset; results are exploratory and not generalizable.
-- Trait scoring is heuristic; use as guidance, not as a definitive judgment.
-- Best used for self-tracking and reflection, not for high-stakes decisions.
-
-### Reflections (NLP)
-Reflections are analyzed with sentiment and lightweight trait signals. Visuals are generated in notebooks and excluded from git.
-
-
-## Upcoming Work
-
-- Integrate NLP features into modeling
-- Introduce XGBoost/LightGBM with hyperparameter tuning
-- Add SHAP-based interpretability and stronger model cards
-- Provide a multi-user demo path (sample persona + JD + reports)
-
-## Quick Start
-
-### Requirements
-- Python **3.11+**
-- [Poetry](https://python-poetry.org/) for dependency management
-
-### Install and run (demo with sample data)
+### Option A: Try the Demo Instantly
 
 ```bash
 git clone https://github.com/deepakdeo/cte-project.git
 cd cte-project
 poetry install
-```
 
-Run the cleaning pipeline on the included sample:
-
-```bash
-poetry run python src/cte/data.py   --in data/sample/cte_sample.csv   --out data/sample/clean_sample.parquet
-```
-
-Inspect the processed output:
-
-```bash
-poetry run python -c "
-import pandas as pd
-df = pd.read_parquet('data/sample/clean_sample.parquet')
-print(f'Dataset: {df.shape[0]} rows, {df.shape[1]} columns')
-print('\nSample columns:', df.columns[:12].tolist())
-print('\nHead:\n', df.head(3))
-"
-```
-
-### Docker (Optional)
-
-Build and run the demo app:
-
-```bash
-docker build -t cte-app .
-docker run --rm -p 8501:8501 cte-app
-```
-
-Or with Docker Compose:
-
-```bash
-docker compose up --build
-```
-
-## Demo (Streamlit App)
-
-Run the dashboard locally:
-
-```bash
+# Launch the dashboard
 PYTHONPATH=src poetry run streamlit run scripts/cte_app.py
 ```
 
-Notes:
-- The sidebar expects a persona JSON (generated in `notebooks/06_Persona_LLM.ipynb`).
-- Set `OPENAI_API_KEY` in a `.env` file if you want LLM-based JD parsing and sentiment.
- 
-Sample inputs:
-- Persona: `data/sample/sample_persona.json`
-- JD: `data/sample/sample_jd.txt`
+Then click **"🧪 Demo Mode → Load Demo Assets"** in the sidebar to see the full experience.
 
-Quick demo flow:
-1) Launch the app.
-2) In the sidebar, set the persona to `data/sample/sample_persona.json`.
-3) Paste the sample JD from `data/sample/sample_jd.txt` into the Evaluate Job tab.
-
-Starter Mode:
-- Use the sidebar “Starter Mode” questionnaire to create a low-confidence persona
-  and begin logging daily updates immediately.
-
-CLI usage:
+### Option B: Generate Your Own Demo Data
 
 ```bash
-PYTHONPATH=src poetry run python scripts/cte_cli.py --persona path/to/06_profile_persona_llm.json --jd path/to/jd.txt
+# Generate 90 days of synthetic behavioral data
+poetry run python src/cte/synthetic.py --days 90 --out data/sample/my_data.csv
+
+# Clean it
+poetry run python src/cte/data.py --in data/sample/my_data.csv --out data/sample/my_data_clean.parquet
+
+# Generate a persona
+PYTHONPATH=src poetry run python scripts/generate_demo_persona.py
 ```
 
-## Supported Data Types (Cleaned Schema)
+### Option C: Use Docker
 
-**Sleep & Timing**
-- `sleep_duration_h` (float hours)
-- `wakeup_time_minutes`, `bed_time_minutes`, `dinner_time_minutes` (int minutes after midnight)
+```bash
+docker compose up --build
+# Open http://localhost:8501
+```
 
-**Productivity**
-- `productivity_pct` (0–100; validated/clipped)
-- `when_most_productive_decoded` (categorical)
-- `prod_morning`, `prod_afternoon`, `prod_evening`, `prod_none` (one-hot ints)
+---
 
-**Health & Habits**
-- `studied_at_home`, `studied_at_school`, `workout_did`, `meditation`,
-  `morning_shower`, `played_sports`, `sickness`, `nap_today` (Int64 0/1)
-- `water_drank_l`, `breakfast_quality`, `lunch_quality`, `dinner_quality` (floats)
+## Why Use CTE?
 
-**Social Interactions**
-- `{partner|family|friends}_score` (−1=negative, 0=neutral, +1=positive, NaN=unknown)
-- `{partner|family|friends}_no_interaction` (Int64 0/1)
+| Use Case | How CTE Helps |
+|----------|---------------|
+| **Self-improvement** | Track your patterns, understand what drives productivity |
+| **Career planning** | Match your traits to job requirements before applying |
+| **Workforce analytics** | Framework for trait-based team composition |
+| **Research** | Reproducible pipeline for behavioral studies |
+| **Learning** | Well-structured ML project demonstrating end-to-end skills |
 
-**Mood & Text**
-- `primary_mood`, `secondary_mood` (normalized strings)
-- `reflection` (free text; unmodified)
+---
 
-> The original CSV headers (with newlines/typos) are normalized internally; see `src/cte/data.py::RENAME_MAP`.
+## Core Features
 
-## Project Layout
+### Synthetic Data Generator
+Generate realistic behavioral data for testing or demos:
+
+```python
+from cte.synthetic import generate_synthetic_dataset
+
+# Generate 90 days of data with temporal correlations
+df = generate_synthetic_dataset(n_days=90, seed=42)
+```
+
+The generator creates realistic patterns including:
+- Weekday/weekend differences
+- Sleep → productivity correlations
+- Mood coherence with reflections
+- Social interaction patterns
+
+### Robust Data Cleaning
+
+```python
+from cte.data import clean_csv
+
+# Handles messy real-world data
+clean_csv("raw_data.csv", "clean.parquet")
+```
+
+- Header normalization (handles newlines, typos)
+- Deterministic date/time parsing
+- Duration parsing (`7h38m` → 7.63 hours)
+- Flexible boolean coercion (`yes/y/true/1` → 1)
+- Social interaction encoding (positive/neutral/negative → +1/0/-1)
+
+### Feature Engineering
+
+```python
+from cte.features import engineer_features
+
+# Add lags, rolling stats, cyclical encodings
+df_features = engineer_features(df_clean)
+```
+
+- Lag features (t-1, t-2, t-3)
+- 7-day rolling mean/std
+- Cyclical time encodings (sin/cos)
+- Day-of-week one-hots
+
+### Job-Fit Scoring
+
+```python
+from cte.scoring import score_requirements
+
+# Compare persona against job requirements
+overall, match_ratio, risk, details, criticals = score_requirements(
+    per_trait=persona["per_trait"],
+    requirements=[
+        {"trait": "communication", "required_level": "high"},
+        {"trait": "teamwork", "required_level": "medium"},
+    ]
+)
+# Returns: "Strong fit", 0.85, "low-risk", [...], []
+```
+
+---
+
+## Project Structure
 
 ```
 cte-project/
+├── src/cte/                    # Core Python package
+│   ├── data.py                 # Data cleaning pipeline
+│   ├── features.py             # Feature engineering
+│   ├── synthetic.py            # Synthetic data generator
+│   ├── nlp.py                  # Sentiment analysis
+│   ├── requirements.py         # JD parsing (LLM + heuristic)
+│   ├── scoring.py              # Job-fit scoring
+│   └── report.py               # Report generation
+├── scripts/
+│   ├── cte_app.py              # Streamlit dashboard
+│   ├── cte_cli.py              # CLI tool
+│   └── generate_demo_persona.py # Demo persona generator
+├── tests/                      # Unit tests (56 tests)
+│   ├── test_synthetic.py
+│   ├── test_data.py
+│   └── test_scoring.py
+├── notebooks/                  # Analysis notebooks
+│   ├── 01_EDA.ipynb
+│   ├── 02_Features.ipynb
+│   ├── 03_Baselines.ipynb
+│   └── ...
 ├── data/
-│ ├── sample/
-│ │ ├── cte_sample.csv         # small demo dataset (committed)
-│ │ ├── sample_persona.json    # demo persona
-│ │ └── sample_jd.txt          # demo job description
-│ ├── raw/                     # your private raw data (gitignored)
-│ └── interim/                 # cleaned / feature data (gitignored)
-├── assets/
-│ └── cte_overview.png          # README overview graphic
-├── notebooks/
-│ ├── 01_Preprocessing.ipynb   # data cleaning
-│ ├── 02_Features.ipynb        # feature engineering
-│ ├── 03_Baselines.ipynb       # baseline modeling
-│ ├── 04_Modeling.ipynb        # advanced modeling
-│ ├── 05_TraitScoring.ipynb    # trait scoring
-│ ├── 06_Persona_LLM.ipynb     # persona generation
-│ └── reports/                 # generated outputs (gitignored)
-├── models/                    # saved trained models (.joblib)
-├── scripts/                   # Streamlit app + CLI
-├── src/
-│ └── cte/
-│ ├── init.py
-│ ├── data.py # cleaning pipeline (MVP)
-│ ├── features.py # feature engineering logic
-│ ├── nlp.py # sentiment + trait extraction
-│ ├── requirements.py # JD parsing
-│ ├── scoring.py # job-fit scoring
-│ ├── report.py # report writer
-│ ├── openai_util.py # OpenAI helper
-│ └── persona.py # persona loading
-├── .gitignore
-├── poetry.lock
-├── pyproject.toml
-└── README.md
-```
-> The `Project Layout` above shows the repository structure as of **Phase 3**.  
-> Within `src/cte/`, upcoming modules like `api.py` (for deployment) and `insights.py` (for interpretability) will be added as phases progress.
-
-## Pipeline (End-to-End Flow)
-
-```
-Raw CSV/Logs
-   ↓
-Data cleaning (deterministic parsing)
-   ↓
-Feature engineering (lags, rollings, time encodings)
-   ↓
-Modeling + evaluation (time-aware CV)
-   ↓
-Trait profile + job-fit scoring
-   ↓
-Streamlit dashboard / CLI reports
+│   └── sample/                 # Demo data (committed)
+│       ├── synthetic_90d.csv
+│       ├── demo_persona.json
+│       └── sample_jd.txt
+└── docs/                       # Additional documentation
+    └── COLLECT_YOUR_DATA.md    # Data collection guide
 ```
 
+---
 
-## Development Roadmap
+## Running Tests
 
-**Phase 1 — Data Foundation** ✅  
-- Cleaning pipeline, schema normalization, documented sample
+```bash
+poetry run pytest tests/ -v
 
-**Phase 2 — Feature Engineering** ✅  
-- Rolling windows, trend/volatility, circadian features
+# With coverage
+poetry run pytest tests/ --cov=src/cte --cov-report=term-missing
+```
 
-**Phase 3 — Baseline Modeling** ✅  
-- Linear, Ridge, RandomForest, GradientBoosting regressors
-- Time-aware cross-validation and baseline leaderboard
+---
 
-**Phase 4 — Interpretability**  
-- SHAP/LIME, feature importances, ablations
+## Bring Your Own Data
 
-**Phase 5 — Advanced Analytics**  
-- NLP on reflections, structured insight generation
+CTE works with any behavioral tracking data that matches the schema. See [docs/COLLECT_YOUR_DATA.md](docs/COLLECT_YOUR_DATA.md) for:
 
-**Phase 6 — Deployment**  
-- FastAPI endpoints, Streamlit demo, Dockerization
+- Required columns and formats
+- Optional columns
+- Data collection tips
+- Integration with tracking apps
 
-## Project Story (Recruiter One-Pager)
+---
 
-See `docs/project_story.md`.
+## The Pipeline in Detail
+
+### 1. Data Cleaning (`data.py`)
+
+Transforms messy self-tracking exports into clean, typed data:
+
+| Raw Input | Cleaned Output |
+|-----------|----------------|
+| `"Jan 27, 2025"` | `2025-01-27` (datetime) |
+| `"7h38m"` or `"7:38"` | `7.63` (float hours) |
+| `"yes"`, `"Y"`, `"1"` | `1` (Int64) |
+| `"positive"` | `1.0` (interaction score) |
+
+### 2. Feature Engineering (`features.py`)
+
+Adds temporal and behavioral features:
+
+- **Cyclical encoding**: `wakeup_time` → `wakeup_sin`, `wakeup_cos`
+- **Lags**: `productivity_lag1`, `sleep_lag2`
+- **Rolling stats**: `productivity_roll7_mean`, `productivity_roll7_std`
+
+### 3. Trait Extraction
+
+Maps behavioral patterns to personality traits:
+
+| Behavior Pattern | Trait |
+|------------------|-------|
+| High productivity + deep work | Focus |
+| Consistent routines | Reliability |
+| Recovery from low days | Resilience |
+| Positive social interactions | Communication |
+
+### 4. Job-Fit Scoring (`scoring.py`)
+
+Matches persona against requirements with configurable thresholds:
+
+```python
+thresholds = {"low": 0.50, "medium": 0.60, "high": 0.70}
+weights = {"low": 1.0, "medium": 1.2, "high": 1.5}
+```
+
+Returns explainable verdicts: **Strong fit**, **Possible fit**, **Leaning no**, **Not a fit**
+
+---
+
+## Streamlit Dashboard
+
+The interactive dashboard provides:
+
+- **Dashboard**: Radar charts, trait breakdown, performance trends
+- **Job Evaluation**: Paste a JD, get instant fit analysis
+- **Daily Updates**: Log daily performance, build evidence
+- **Starter Mode**: Create a persona from a 2-minute questionnaire
+
+---
+
+## CLI Usage
+
+```bash
+# Evaluate job fit from command line
+PYTHONPATH=src poetry run python scripts/cte_cli.py \
+  --persona data/sample/demo_persona.json \
+  --jd data/sample/sample_jd.txt
+```
+
+---
+
+## Limitations & Responsible Use
+
+- **Not a hiring tool**: CTE is for self-reflection and career exploration, not employment decisions
+- **Small sample sizes**: Trait scores are estimates; treat with appropriate uncertainty
+- **Privacy first**: All processing runs locally; no data leaves your machine
+- **Bias awareness**: Self-reported data reflects perception, not objective reality
+
+---
 
 ## Tech Stack
 
-- **Core**: Python 3.11, pandas, numpy
-- **Tooling**: Poetry, argparse CLI
-- **Planned ML**: scikit-learn, XGBoost/LightGBM
-- **Planned NLP**: HuggingFace Transformers
-- **Planned Deployment**: FastAPI, Streamlit, Docker
+| Category | Technologies |
+|----------|--------------|
+| **Core** | Python 3.11+, pandas, numpy, scikit-learn |
+| **NLP** | transformers, vaderSentiment, OpenAI API |
+| **ML** | XGBoost, statsmodels, SHAP |
+| **App** | Streamlit, Plotly |
+| **Infra** | Poetry, Docker, pytest |
 
-## Privacy
+---
 
-CTE is designed for local analysis of personal data. All processing occurs on your machine; raw personal data is excluded from version control by default.
+## Roadmap
+
+- [x] **Phase 1**: Data cleaning pipeline
+- [x] **Phase 2**: Feature engineering
+- [x] **Phase 3**: Baseline modeling
+- [x] **Phase 4**: Synthetic data generator
+- [x] **Phase 5**: Test suite
+- [ ] **Phase 6**: FastAPI endpoints
+- [ ] **Phase 7**: Public dataset validation
+- [ ] **Phase 8**: Multi-user support
+
+---
+
+## Contributing
+
+Contributions welcome! Areas of interest:
+
+- Additional trait extraction methods
+- Integration with more data sources (Oura, Whoop, etc.)
+- Public dataset validation
+- UI/UX improvements
+
+---
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT — see [LICENSE](LICENSE)

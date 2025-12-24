@@ -51,6 +51,14 @@ matplotlib = "^3.10.5"
 seaborn = "^0.13.2"
 statsmodels = "^0.14.5"
 scipy = "^1.16.1"
+pytest = "^8.0.0"
+pytest-cov = "^4.1.0"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+addopts = "-v --tb=short"
 
 [tool.poetry]
 packages = [

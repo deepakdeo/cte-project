@@ -1,0 +1,18 @@
+Rows: 72, Columns: 60
+
+Top correlations with productivity:
+- prod_afternoon: 0.52
+- prod_evening: 0.48
+- nap_today: 0.42
+- prod_morning: 0.39
+- studied_at_home: 0.32
+- sleep_duration_h: 0.29
+- morning_shower: 0.21
+- partner_score: 0.19
+
+Average productivity by dinner_quality:
+- balanced: 48.9
+- carb_heavy: 36.8
+- protein_heavy: 27.2
+- no_meal: nan
+- fat_heavy: nan

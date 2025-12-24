@@ -1,37 +1,42 @@
+# Virtual environment and Python cache
 .venv/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Data directories (keep sample data)
 data/*
 !data/sample/
 !data/sample/**
+
+# Models and ML artifacts
 models/
 mlruns/
-docs/portfolio-notes.md
+
+# Parquet files (except in sample)
 *.parquet
-# Keep notebooks, but ignore generated reports/outputs
-!notebooks/
+!data/sample/*.parquet
+
+# Notebooks reports (generated)
 notebooks/reports/
-
-
-# Ignore Jupyter checkpoints
 notebooks/.ipynb_checkpoints/
-/docs/*
-!docs/project_story.md
+**/.ipynb_checkpoints/
+
+# Documentation (keep specific files)
+docs/portfolio-notes.md
+
+# Generated persona files
 **/*_updated*.json
-=1.45.0
-=1.51
+
+# Backup files
 src/cte/nlp_backup_20251113.py
 scripts/cte_app_OG.py
 scripts/cte_app_claude.py
 scripts/cte_app_nov11.py
+
+# Misc
 jd.txt
-.DS_Store
-
-# Jupyter checkpoints
-.ipynb_checkpoints/
-
-# Jupyter checkpoints
-.ipynb_checkpoints/
-**/.ipynb_checkpoints/
 .env
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
