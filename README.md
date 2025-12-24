@@ -17,6 +17,12 @@ I wanted to know how sleep, routines, and social context actually show up in my 
 
 > **Status:** Phase 3 (feature engineering and baseline modeling complete, moving toward advanced modeling) ✅
 
+## Impact (What This Demonstrates)
+
+- End-to-end DS workflow: data cleaning, feature engineering, modeling, NLP, evaluation.
+- Reproducibility: typed Parquet outputs, deterministic parsing, time-aware validation.
+- Product thinking: interactive dashboard + CLI and a job-fit scoring layer.
+
 
 ## Current Features
 
