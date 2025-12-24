@@ -225,6 +225,22 @@ cte-project/
 > The `Project Layout` above shows the repository structure as of **Phase 3**.  
 > Within `src/cte/`, upcoming modules like `api.py` (for deployment) and `insights.py` (for interpretability) will be added as phases progress.
 
+## Pipeline (End-to-End Flow)
+
+```
+Raw CSV/Logs
+   ↓
+Data cleaning (deterministic parsing)
+   ↓
+Feature engineering (lags, rollings, time encodings)
+   ↓
+Modeling + evaluation (time-aware CV)
+   ↓
+Trait profile + job-fit scoring
+   ↓
+Streamlit dashboard / CLI reports
+```
+
 
 ## Development Roadmap
 
