@@ -1,9 +1,9 @@
 # CTE — Character Traits Evaluator
 
+![CI](https://github.com/deepakdeo/cte-project/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
 ![Poetry](https://img.shields.io/badge/poetry-managed-blue)
 ![Streamlit](https://img.shields.io/badge/streamlit-app-red)
-![Tests](https://img.shields.io/badge/tests-56%20passed-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 ![CTE Overview](assets/cte_overview.png)
