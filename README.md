@@ -50,6 +50,15 @@ With **03_Baselines.ipynb**, the project now includes a predictive layer that co
 - Generated visual diagnostics (predicted vs true plots, residuals, feature importances)
 - Built model card and leaderboard export for reproducibility
 
+## Results & Evaluation
+
+Highlights from baseline modeling and diagnostics:
+- Time-aware CV across multiple baselines (Linear/Ridge/RandomForest/GBRT)
+- Feature importance + error analysis to surface top behavioral drivers
+- Consistent evaluation artifacts (leaderboard, residuals, pred-vs-true)
+
+See `notebooks/03_Baselines.ipynb` and `notebooks/reports/` for details.
+
 ### Reflections (NLP quick look)
 The word cloud below is a quick, frequency-only visual of my daily reflections; it’s helpful for intuition, not inference.
 Substantive signals come from simple NLP features (sentiment, topic scores) and model metrics that relate those signals to `productivity_pct`.
