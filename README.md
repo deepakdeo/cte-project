@@ -156,6 +156,10 @@ Quick demo flow:
 2) In the sidebar, set the persona to `data/sample/sample_persona.json`.
 3) Paste the sample JD from `data/sample/sample_jd.txt` into the Evaluate Job tab.
 
+Starter Mode:
+- Use the sidebar “Starter Mode” questionnaire to create a low-confidence persona
+  and begin logging daily updates immediately.
+
 CLI usage:
 
 ```bash

@@ -206,6 +206,40 @@ def _save_persona_and_refresh(ppath: Path, persona_obj: dict) -> Path:
     read_persona_cached.clear()
     return updated_path
 
+def _seed_persona_from_onboarding(answers: dict) -> dict:
+    """
+    Build a low-confidence persona from onboarding responses.
+    Scores are normalized to 0..1 and intentionally conservative.
+    """
+    def _z(x, lo=1, hi=5):
+        return (max(lo, min(hi, x)) - lo) / (hi - lo)
+
+    focus = _z(answers["focus"])
+    planning = _z(answers["planning"])
+    adaptability = _z(answers["adaptability"])
+    communication = _z(answers["communication"])
+    learning = _z(answers["learning"])
+    resilience = _z(answers["resilience"])
+
+    # Blend to keep scores near center for cold start
+    def _blend(v):
+        return round(0.4 + 0.6 * v, 3)
+
+    per_trait = {
+        "focus": {"score": _blend(focus), "confidence": 0.35, "evidence": []},
+        "planning": {"score": _blend(planning), "confidence": 0.35, "evidence": []},
+        "adaptability": {"score": _blend(adaptability), "confidence": 0.35, "evidence": []},
+        "communication": {"score": _blend(communication), "confidence": 0.35, "evidence": []},
+        "learning_mindset": {"score": _blend(learning), "confidence": 0.35, "evidence": []},
+        "resilience": {"score": _blend(resilience), "confidence": 0.35, "evidence": []},
+        "reliability": {"score": _blend((focus + planning) / 2), "confidence": 0.35, "evidence": []},
+        "impact": {"score": _blend((focus + communication) / 2), "confidence": 0.35, "evidence": []},
+        "teamwork": {"score": _blend(communication), "confidence": 0.35, "evidence": []},
+        "independence": {"score": _blend((focus + resilience) / 2), "confidence": 0.35, "evidence": []},
+    }
+
+    return {"name": "Starter Persona", "per_trait": per_trait}
+
 # =========================
 # HEADER / TUTORIAL
 # =========================
@@ -253,6 +287,7 @@ with st.sidebar:
             key="persona_path_input",
             help="Path to your character persona JSON file"
         )
+        st.session_state["persona_path"] = persona_path
         # Load persona (cached)
         try:
             per_trait, persona_full = read_persona_cached(persona_path)
@@ -281,6 +316,36 @@ with st.sidebar:
             st.error("❌ Could not load persona")
             with st.expander("Error details"):
                 st.code(str(e))
+
+    # Starter Mode (cold start)
+    with st.expander("🚀 Starter Mode", expanded=False):
+        st.caption("Seed a low-confidence persona from a 2-minute questionnaire.")
+        q1 = st.slider("I can sustain deep focus when needed", 1, 5, 3)
+        q2 = st.slider("I plan my work and follow through", 1, 5, 3)
+        q3 = st.slider("I adapt well to changes and ambiguity", 1, 5, 3)
+        q4 = st.slider("I communicate clearly with others", 1, 5, 3)
+        q5 = st.slider("I actively learn and improve", 1, 5, 3)
+        q6 = st.slider("I recover quickly from setbacks", 1, 5, 3)
+
+        if st.button("✨ Create Starter Persona", use_container_width=True):
+            answers = {
+                "focus": q1,
+                "planning": q2,
+                "adaptability": q3,
+                "communication": q4,
+                "learning": q5,
+                "resilience": q6,
+            }
+            persona = _seed_persona_from_onboarding(answers)
+            outdir = Path("data/personas")
+            outdir.mkdir(parents=True, exist_ok=True)
+            ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+            outpath = outdir / f"persona_seeded_{ts}.json"
+            outpath.write_text(json.dumps(persona, indent=2))
+            st.session_state["persona_path"] = str(outpath)
+            st.session_state["persona_path_input"] = str(outpath)
+            read_persona_cached.clear()
+            st.success(f"Starter persona saved: {outpath}")
 
     # Analysis
     with st.expander("🤖 Analysis Settings", expanded=False):
@@ -321,6 +386,19 @@ with st.sidebar:
     with st.expander("💾 Output Settings", expanded=False):
         outdir = st.text_input("Save reports to", value="notebooks/reports")
         save_history = st.checkbox("Save evaluation to history (session)", value=True)
+
+    # Demo mode
+    with st.expander("🧪 Demo Mode", expanded=False):
+        st.caption("Load sample persona + JD for a 60-second demo.")
+        if st.button("Load Demo Assets", use_container_width=True):
+            st.session_state["persona_path"] = "data/sample/sample_persona.json"
+            st.session_state["persona_path_input"] = "data/sample/sample_persona.json"
+            try:
+                st.session_state["jd_text"] = Path("data/sample/sample_jd.txt").read_text()
+            except Exception:
+                st.session_state["jd_text"] = ""
+            read_persona_cached.clear()
+            st.success("Demo persona and JD loaded.")
 
 # =========================
 # MAIN TABS
