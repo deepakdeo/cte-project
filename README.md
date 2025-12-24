@@ -104,6 +104,24 @@ print('\nHead:\n', df.head(3))
 "
 ```
 
+## Demo (Streamlit App)
+
+Run the dashboard locally:
+
+```bash
+PYTHONPATH=src poetry run streamlit run scripts/cte_app.py
+```
+
+Notes:
+- The sidebar expects a persona JSON (generated in `notebooks/06_Persona_LLM.ipynb`).
+- Set `OPENAI_API_KEY` in a `.env` file if you want LLM-based JD parsing and sentiment.
+
+CLI usage:
+
+```bash
+PYTHONPATH=src poetry run python scripts/cte_cli.py --persona path/to/06_profile_persona_llm.json --jd path/to/jd.txt
+```
+
 ## Supported Data Types (Cleaned Schema)
 
 **Sleep & Timing**
