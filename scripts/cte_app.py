@@ -16,6 +16,7 @@ from cte.requirements import extract_requirements_llm, extract_requirements_hybr
 from cte.scoring import score_requirements
 from cte.report import save_report
 from cte.nlp import analyze_sentiment  # sentiment analysis util
+from cte.openai_util import set_api_key, has_api_key
 
 # =========================
 # PAGE CONFIG
@@ -366,13 +367,30 @@ with st.sidebar:
 
     # Analysis
     with st.expander("🤖 Analysis Settings", expanded=False):
-        model = st.selectbox(
-            "OpenAI Model",
-            ["gpt-4o-mini", "gpt-4.1-mini"],
-            index=0,
-            help="Model used to extract requirements from JD"
+        st.markdown("**OpenAI API (Optional)**")
+        st.caption("Add your API key to enable LLM-powered JD analysis. Without it, the app uses keyword-based extraction (still works fine).")
+        user_api_key = st.text_input(
+            "OpenAI API Key",
+            type="password",
+            placeholder="sk-...",
+            help="Your own OpenAI API key. Get one at platform.openai.com"
         )
+        if user_api_key:
+            set_api_key(user_api_key)
+            st.success("✓ API key set")
 
+        if has_api_key():
+            model = st.selectbox(
+                "OpenAI Model",
+                ["gpt-4o-mini", "gpt-4.1-mini"],
+                index=0,
+                help="Model used to extract requirements from JD"
+            )
+        else:
+            model = "gpt-4o-mini"  # Default, won't be used without key
+            st.info("💡 No API key = keyword-based extraction (free)")
+
+        st.divider()
         st.markdown("**Scoring Thresholds**  (score ≥ threshold ⇒ trait met)")
         c1, c2 = st.columns(2)
         with c1:

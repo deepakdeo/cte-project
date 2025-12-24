@@ -10,15 +10,30 @@ except Exception:
     pass
 
 _client = None
+_runtime_key = None
+
+def set_api_key(key: str):
+    """Set API key at runtime (e.g., from user input in Streamlit)."""
+    global _client, _runtime_key
+    _runtime_key = key.strip() if key else None
+    _client = None  # Reset client to use new key
+
+def get_api_key() -> str:
+    """Get current API key (runtime key takes precedence over env)."""
+    return _runtime_key or (os.getenv("OPENAI_API_KEY") or "").strip()
+
+def has_api_key() -> bool:
+    """Check if an API key is available."""
+    return bool(get_api_key())
 
 def client() -> OpenAI:
-    """Singleton OpenAI client initialized from OPENAI_API_KEY (prefers .env)."""
+    """Singleton OpenAI client initialized from runtime key or OPENAI_API_KEY."""
     global _client
     if _client is None:
-        key = (os.getenv("OPENAI_API_KEY") or "").strip()
+        key = get_api_key()
         if not key:
             raise RuntimeError(
-                "OPENAI_API_KEY not set. Put it in .env or export it in your shell."
+                "OPENAI_API_KEY not set. Add it in the app sidebar or set it in .env."
             )
         _client = OpenAI(api_key=key)
     return _client

@@ -280,14 +280,16 @@ PYTHONPATH=src poetry run python scripts/cte_cli.py \
 1. Fork this repo
 2. Go to [share.streamlit.io](https://share.streamlit.io)
 3. Connect your GitHub and select the repo
-4. Set:
-   - Main file: `scripts/cte_app.py`
-   - Python version: 3.11
-5. Add secret `OPENAI_API_KEY` (optional, for LLM features)
+4. Set main file: `scripts/cte_app.py`
+5. Deploy!
 
 Your dashboard will be live at `https://your-app.streamlit.app`
 
+> **Note**: The app works without an OpenAI API key (uses keyword-based extraction). Users can optionally add their own API key in the sidebar for LLM-powered analysis.
+
 ### Docker
+
+First, install [Docker Desktop](https://www.docker.com/products/docker-desktop/) for your OS.
 
 ```bash
 docker compose up --build
