@@ -1,10 +1,11 @@
 # CTE — Character Traits Evaluator
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-red?logo=streamlit)](https://cte-project-deepakdeo.streamlit.app/)
 ![CI](https://github.com/deepakdeo/cte-project/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue)
-![Poetry](https://img.shields.io/badge/poetry-managed-blue)
-![Streamlit](https://img.shields.io/badge/streamlit-app-red)
 ![License](https://img.shields.io/badge/license-MIT-green)
+
+### [Try the Live Demo →](https://cte-project-deepakdeo.streamlit.app/)
 
 ![CTE Overview](assets/cte_overview.png)
 
@@ -55,14 +56,18 @@ poetry run python src/cte/data.py --in data/sample/my_data.csv --out data/sample
 PYTHONPATH=src poetry run python scripts/generate_demo_persona.py
 ```
 
-### Option C: Use Docker (requires Docker installed)
+### Option C: Use Docker
 
+First, install [Docker Desktop](https://www.docker.com/products/docker-desktop/) for your OS.
+
+Then run:
 ```bash
 docker compose up --build
-# Open http://localhost:8501
 ```
 
-Don't have Docker? Use Option A or B instead.
+Open [http://localhost:8501](http://localhost:8501) in your browser.
+
+To stop: press `Ctrl+C` in the terminal.
 
 ---
 
