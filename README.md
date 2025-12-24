@@ -5,7 +5,7 @@
 ![Streamlit](https://img.shields.io/badge/streamlit-app-red)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-![CTE Overview](assets/cte_dashboard.png)
+![CTE Overview](assets/cte_overview.png)
 
 A project that analyzes 27 wearable metrics and daily reflections, runs EDA/NLP/ML, and uses an LLM to profile traits and generate data-driven recommendations.
 
@@ -204,7 +204,7 @@ cte-project/
 │ ├── raw/                     # your private raw data (gitignored)
 │ └── interim/                 # cleaned / feature data (gitignored)
 ├── assets/
-│ └── cte_dashboard.png         # README screenshot
+│ └── cte_overview.png          # README overview graphic
 ├── notebooks/
 │ ├── 01_Preprocessing.ipynb   # data cleaning
 │ ├── 02_Features.ipynb        # feature engineering
