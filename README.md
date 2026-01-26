@@ -58,16 +58,7 @@ PYTHONPATH=src poetry run python scripts/generate_demo_persona.py
 
 ### Option C: Use Docker
 
-First, install [Docker Desktop](https://www.docker.com/products/docker-desktop/) for your OS.
-
-Then run:
-```bash
-docker compose up --build
-```
-
-Open [http://localhost:8501](http://localhost:8501) in your browser.
-
-To stop: press `Ctrl+C` in the terminal.
+Use the Docker quickstart below (recommended for a clean, reproducible setup).
 
 ---
 
@@ -289,12 +280,51 @@ Your dashboard will be live at `https://your-app.streamlit.app`
 
 ### Docker
 
-First, install [Docker Desktop](https://www.docker.com/products/docker-desktop/) for your OS.
+#### Docker Quickstart
+
+1. Install Docker Desktop
+2. Clone this repo
+3. Optional: edit `.env` (included) to add your `OPENAI_API_KEY`
+4. Run:
 
 ```bash
 docker compose up --build
-# Open http://localhost:8501
 ```
+
+Open http://localhost:8501
+
+#### Stop & Cleanup
+
+```bash
+# Stop containers
+docker compose down
+
+# Stop and remove volumes
+docker compose down --volumes
+
+# Remove built image
+docker rmi cte-project-cte-app
+
+# Full cleanup (removes all unused Docker data)
+docker system prune -a --volumes
+```
+
+#### Troubleshooting
+
+- **gcc/wordcloud compilation issue**: fixed by installing build tools in the Docker image.
+- **Apple Silicon**: builds natively on `linux/arm64`. If you hit a dependency that won’t compile, try rebuilding from scratch (below).
+- **Build fails**: run `docker compose down --volumes` then `docker compose up --build`.
+- **Rebuild from scratch**:
+  ```bash
+  docker compose down --volumes
+  docker compose build --no-cache
+  docker compose up
+  ```
+
+#### Data / Demo Mode
+
+- The app runs without any local data. Use **Quick Start** in the sidebar to create a persona.
+- If you want bundled demo assets (sample personas/JDs), keep `data/` in your repo and Docker will mount it at runtime.
 
 ---
 
